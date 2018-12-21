@@ -12,8 +12,6 @@ from discord.ext.commands import has_role
 
 
 loop = True
-KEY = "AIzaSyALAE90ZaTrXiPanf1ntcYfQy6oennetU4"
-DISCORD_BOT_SECRET = "NTE3NzQ5ODIxMDU1MTcyNjIw.Duq6Jg.rEBAVJmiFEiLvmRST919Xfi2hOs"
 
 client = commands.Bot(command_prefix='+')
 @client.event
@@ -24,7 +22,7 @@ async def on_ready():
 
 @client.command()
 async def gap():
-    key = KEY
+    key = os.getenv("KEY")
     data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
     subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
     data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
@@ -34,7 +32,7 @@ async def gap():
 
 @client.command()
 async def dislikes():
-    key = KEY
+    key = os.getenv("KEY")
     data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=YbJOTdZBX1g&key="+key).read()
     dis = json.loads(data)["items"][0]['statistics']['dislikeCount']
     data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=kffacxfA7G4&key="+key).read()
@@ -161,5 +159,5 @@ async def on_message(message):
             await client.send_message(message.channel, "YOU ARE A DISAPPOINTMENT FOR EVERYONE!!!")    
 
 
-token = DISCORD_BOT_SECRET
+token = os.getenv("DISCORD_BOT_SECRET")
 client.run(token)
