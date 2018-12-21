@@ -129,7 +129,7 @@ async def on_message(message):
         await client.send_message(message.channel, "That's not very nice you know. I only understand English")
 
       else:    
-        if "mate" in message.content or "m8" in message.content or ":mate:" in message.content or message.attachments:
+        if "mate" in m or "m8" in m or ":mate:" in m or message.attachments:
           if message.channel.id != '517780380049473563':
             mesg = "Thank you mate, very cool!!!"
             await client.send_message(message.channel, mesg)
