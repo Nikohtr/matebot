@@ -116,6 +116,8 @@ async def on_message_edit(old, new):
 
 @client.event
 async def on_message(message):
+    m = message.content
+    m = m.lower()
     await client.process_commands(message)
     if message.author != client.user:
       if (message.content.startswith("+") and message.author.id == "263685060819943425"):
@@ -127,7 +129,7 @@ async def on_message(message):
         await client.send_message(message.channel, "That's not very nice you know. I only understand English")
 
       else:    
-        if ("mate" in message.content or "MATE" in message.content or "Mate" in message.content or "M8" in message.content or "m8" in message.content or ":mate:" in message.content) or message.attachments:
+        if "mate" in message.content or "m8" in message.content or ":mate:" in message.content or message.attachments:
           if message.channel.id != '517780380049473563':
             mesg = "Thank you mate, very cool!!!"
             await client.send_message(message.channel, mesg)
