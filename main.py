@@ -81,6 +81,7 @@ async def stopcolor(ctx):
 async def word(ctx, *, word=None):
     global loop
     if ctx.message.author.id == "263685060819943425":
+      await client.send_message(ctx.message.channel, "Saying "+word+" 100,000 times")
       await client.delete_message(ctx.message)
       times = 2000//(len(word)+2)
       to100 = 100000//times
