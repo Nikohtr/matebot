@@ -90,7 +90,7 @@ async def word(ctx, *, word=None):
       else: 
         while count<=to100:
           loop = False
-          await client.change_presence(game=discord.Game(name='SAYING '+word+" 100,000 TIMES."))
+          await client.change_presence(game=discord.Game(name='SAYING '+word+" 100,000 TIMES.")
           await client.send_message(client.get_channel('518709484634243082'), ("\n"+word)*times)
           count+=1
         await client.send_message(client.get_channel('518709484634243082'), "I said "+word+" 100,000 times") 
