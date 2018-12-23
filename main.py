@@ -86,7 +86,7 @@ async def word(ctx, *, word=None):
       times = 2000//(len(word)+2)
       to100 = 100000//times
       count = 0
-      if not word: await client.say("Please specify a word to say 100,000 times"))
+      if not word: await client.say("Please specify a word to say 100,000 times")
       else: 
         while count<=to100:
           loop = False
