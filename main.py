@@ -28,7 +28,7 @@ async def gap():
     data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
     subst = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
     gapis=int(subspew)-int(subst)
-    await client.say("T-series is {:,d}".format(int(gapis))+" subs away from PewDiePie. PewDiePie has {:,d}".format(int(data))+" subscibers and T-series has {:,d}".format(int(data1))+" subscibers!")
+    await client.say("T-series is {:,d}".format(int(gapis))+" subs away from PewDiePie. PewDiePie has {:,d}".format(int(subspew))+" subscibers and T-series has {:,d}".format(int(subst))+" subscibers!")
 
 @client.command()
 async def dislikes():
