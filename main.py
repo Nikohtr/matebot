@@ -12,7 +12,7 @@ from discord.ext.commands import has_role
 
 
 loop = True
-e = discord.Embed(title = "MATEBOT", description="Made by the most epic MATE Niko", color =2b44ff)
+e = discord.Embed(title = "MATEBOT", description="Made by the most epic MATE Niko", color = 0x2b44ff)
 
 
 client = commands.Bot(command_prefix='+')
