@@ -30,7 +30,7 @@ async def esay(ctx, *, mg = None):
 
       if not mg: await client.say("Please specify a message to send")
       else:
-        e.add_field(name = "Epic message", value = msg)
+        e.add_field(name = "Epic message", value = mg)
         await client.send_message(ctx.message.channel, embed = e)
 
 @client.command()
