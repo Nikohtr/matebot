@@ -35,10 +35,10 @@ async def esay(ctx, *, mg = None):
 async def link(ctx, mg = None, link = None):
     if ctx.message.author.id == "263685060819943425":
       await client.delete_message(ctx.message)
-
-      if not mg: await client.say("Please specify a message to send")
+      if not mg or link: await client.say("Please specify what to send")
       else:
-        await client.send_message(ctx.message.channel, embed = discord.Embed(description = "["+str(mg)+"]("+str(link)+")", color = 0x2b44ff))
+        link = "https://www."+str(link)
+        await client.send_message(ctx.message.channel, embed = discord.Embed(description = "["+str(mg)+"]("+link+")", color = 0x2b44ff))
 
         
 @client.command()
