@@ -83,9 +83,9 @@ async def sub():
         key = os.getenv("KEY")
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-        if int(subspew)%1000000==0:
+        if int(subspew)%1000000<=10:
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format((int(subspew)//1000000)*1000000))
-
+        await asyncio.sleep(1)
 
 
 @client.command(pass_context = True)
