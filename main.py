@@ -12,6 +12,8 @@ from discord.ext.commands import has_role
 
 
 loop = True
+e = discord.Embed(title = "MATEBOT", description="Made by the most epic MATE Niko", color =2b44ff)
+
 
 client = commands.Bot(command_prefix='+')
 @client.event
@@ -20,6 +22,16 @@ async def on_ready():
     print(client.user)
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
+    
+@client.command(pass_context = True)
+async def esay(ctx, *, mg = None):
+    if ctx.message.author.id == "263685060819943425":
+      await client.delete_message(ctx.message)
+
+      if not mg: await client.say("Please specify a message to send")
+      else:
+        e.add_field(name = "Epic message", value = msg)
+        await client.send_message(ctx.message.channel, embed = e)
 
 @client.command()
 async def gap():
@@ -82,15 +94,15 @@ async def sub():
     key = os.getenv("KEY")
     data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
     subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-    subsbefore = int(subspew)//1000000
-    print(subspew)
+    subsbefore = int(subspew)//100000
+    print(subsbefore)
     while True:
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-        subsnow = int(subspew)//1000000
+        subsnow = int(subspew)//100000
         if subsnow!=subsbefore:
             subsbefore+=1
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow))
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
         await asyncio.sleep(1)
 
 
