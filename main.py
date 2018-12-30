@@ -19,6 +19,7 @@ async def on_ready():
     print("I'm in")
     print(client.user)
     client.loop.create_task(change_playing())
+    client.loop.create_task(sub())
 
 @client.command()
 async def gap():
@@ -75,6 +76,16 @@ async def stopcolor(ctx):
     global lp
     lp = False
     await client.send_message(ctx.message.channel, "**Stoped rainbow colored roles!**")
+    
+@client.event()
+async def sub():
+    while True:
+        key = os.getenv("KEY")
+        data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
+        subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+        if int(subspew)%1000000==0:
+            client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(int(subspew)))
+    
 
 
 @client.command(pass_context = True)
