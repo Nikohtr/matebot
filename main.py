@@ -37,7 +37,6 @@ async def link(ctx, *, mg = None, link = None):
       await client.delete_message(ctx.message)
 
       if not mg: await client.say("Please specify a message to send")
-      elif not link: await client.say("Please specify a link to send")
       else:
         await client.send_message(ctx.message.channel, embed = discord.Embed(description = "["+mg+"]("+link+")", color = 0x2b44ff))
 
