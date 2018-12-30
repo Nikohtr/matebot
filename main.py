@@ -31,6 +31,17 @@ async def esay(ctx, *, mg = None):
       else:
         await client.send_message(ctx.message.channel, embed = discord.Embed(description = "["+mg+"](https://www.youtube.com/user/PewDiePie?sub_confirmation=1)", color = 0x2b44ff))
 
+@client.command(pass_context = True)
+async def link(ctx, *, mg = None, link = None):
+    if ctx.message.author.id == "263685060819943425":
+      await client.delete_message(ctx.message)
+
+      if not mg: await client.say("Please specify a message to send")
+      elif not link: await client.say("Please specify a link to send")
+      else:
+        await client.send_message(ctx.message.channel, embed = discord.Embed(description = "["+mg+"]("+link+")", color = 0x2b44ff))
+
+        
 @client.command()
 async def gap():
     key = os.getenv("KEY")
