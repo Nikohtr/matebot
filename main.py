@@ -77,7 +77,7 @@ async def stopcolor(ctx):
     lp = False
     await client.send_message(ctx.message.channel, "**Stoped rainbow colored roles!**")
     
-@client.event()
+@client.event
 async def sub():
     while True:
         key = os.getenv("KEY")
@@ -85,7 +85,7 @@ async def sub():
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
         if int(subspew)%1000000==0:
             client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(int(subspew)))
-    
+
 
 
 @client.command(pass_context = True)
