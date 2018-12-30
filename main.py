@@ -12,7 +12,6 @@ from discord.ext.commands import has_role
 
 
 loop = True
-e = discord.Embed(title = "MATEBOT", description="Made by the most epic MATE Niko", color = 0x2b44ff)
 
 
 client = commands.Bot(command_prefix='+')
@@ -30,8 +29,7 @@ async def esay(ctx, *, mg = None):
 
       if not mg: await client.say("Please specify a message to send")
       else:
-        e.add_field(name = "Epic message", value = mg)
-        await client.send_message(ctx.message.channel, embed = e)
+        await client.send_message(ctx.message.channel, discord.Embed(description = mg, color = 0x2b44ff))
 
 @client.command()
 async def gap():
