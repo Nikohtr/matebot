@@ -90,7 +90,7 @@ async def sub():
         subsnow = int(subspew)//1000000
         if subsnow!=subsbefore:
             subsbefore+=1
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow)
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow))
         await asyncio.sleep(1)
 
 
