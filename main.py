@@ -29,7 +29,7 @@ async def esay(ctx, *, mg = None):
 
       if not mg: await client.say("Please specify a message to send")
       else:
-        await client.send_message(ctx.message.channel, embed = discord.Embed(description = mg, url = "https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_AJ5Yw", color = 0x2b44ff))
+        await client.send_message(ctx.message.channel, embed = discord.Embed(description = "["+mg+"](https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_AJ5Yw)", color = 0x2b44ff))
 
 @client.command()
 async def gap():
