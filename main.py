@@ -21,7 +21,7 @@ async def on_ready():
     print(client.user)
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
-    client.loop.create_task(suban())
+    client.loop.create_task(subsan())
     
 @client.command(pass_context = True)
 async def esay(ctx, *, mg = None):
