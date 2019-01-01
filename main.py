@@ -8,7 +8,7 @@ import urllib.request
 import json
 from discord.ext.commands import has_permissions
 from discord.ext.commands import has_role
-
+from datetime import datetime
 
 
 loop = True
@@ -21,6 +21,7 @@ async def on_ready():
     print(client.user)
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
+    client.loop.create_task(suban())
     
 @client.command(pass_context = True)
 async def esay(ctx, *, mg = None):
@@ -68,6 +69,8 @@ def isEnglish(s):
     else:
         return False
 lp = True
+
+
 @client.command(pass_context = True)
 @has_permissions(administrator = True)
 async def color(ctx):
@@ -80,6 +83,21 @@ async def color(ctx):
       color = ('%02X%02X%02X' % (r(),r(),r()))
       await client.edit_role( ctx.message.server, role, color = discord.Colour(value = int(color, 16)))
       await asyncio.sleep(2)
+        
+            
+@client.event
+async def subsan():
+    while True:
+        if datetime.now().time() == datetime.time(0,0):
+            data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
+            subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+            client.send_message(client.get_channel("529692628518830091"), subspew)
+            async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
+                if message.author == client.user:
+                    su = message.content
+            clinet.send_message(cient.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
+
+        
 
 @client.command(pass_context = True)
 @has_permissions(administrator = True)
