@@ -96,7 +96,7 @@ def is_time_between(begin_time, end_time, check_time=None):
 async def subsan():
     print("started")
     while True:
-        if is_time_between(time(23,0,0), time(23,0,1)):
+        if is_time_between(time(23,8,0), time(23,8,1)):
             print("works")
             key = os.getenv("KEY")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
