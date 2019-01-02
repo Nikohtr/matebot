@@ -87,8 +87,11 @@ async def color(ctx):
             
 @client.event
 async def subsan():
+    print("started")
     while True:
+        print("got in while")
         now = datetime.now()
+        print(now.time())
         if now.time() == time(0,6):
             print("works")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
