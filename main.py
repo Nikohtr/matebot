@@ -89,7 +89,7 @@ async def color(ctx):
 async def subsan():
     while True:
         now = datetime.now()
-        if now.time() == time(hour=0,minute=4):
+        if now.time() == time(0,6):
             print("works")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
