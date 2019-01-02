@@ -101,11 +101,11 @@ async def subsan():
             key = os.getenv("KEY")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-            client.send_message(client.get_channel("529692628518830091"), subspew)
+            await client.send_message(client.get_channel("529692628518830091"), subspew)
             async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
                 if message.author == client.user:
                     su = message.content
-            client.send_message(client.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
+            await client.send_message(client.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
         await asyncio.sleep(1)
 
 @client.command(pass_context = True)
