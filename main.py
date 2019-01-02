@@ -91,8 +91,8 @@ async def subsan():
     while True:
         now = datetime.now()
         print(now.time())
-        print(time(22,21,0))
-        if now.time() == time(22,21):
+        print(time(22,25,0))
+        if now.time() == time(22,25):
             print("works")
             key = os.getenv("KEY")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
