@@ -97,6 +97,7 @@ async def subsan():
                 if message.author == client.user:
                     su = message.content
             clinet.send_message(cient.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
+        await asyncio.sleep(1)
 
         
 
