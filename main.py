@@ -8,7 +8,7 @@ import urllib.request
 import json
 from discord.ext.commands import has_permissions
 from discord.ext.commands import has_role
-import datetime
+from datetime import datetime
 
 
 loop = True
@@ -88,7 +88,8 @@ async def color(ctx):
 @client.event
 async def subsan():
     while True:
-        if datetime.now().time() == datetime.time(0,0):
+        now = datetime.now()
+        if now.time() == datetime.time(hour=0,minute=0):
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
             client.send_message(client.get_channel("529692628518830091"), subspew)
