@@ -89,7 +89,8 @@ async def color(ctx):
 async def subsan():
     while True:
         now = datetime.now()
-        if now.time() == time(hour=0,minute=0):
+        if now.time() == time(hour=0,minute=4):
+            print("works")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
             client.send_message(client.get_channel("529692628518830091"), subspew)
