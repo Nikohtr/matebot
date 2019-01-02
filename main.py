@@ -90,9 +90,7 @@ async def subsan():
     print("started")
     while True:
         now = datetime.now()
-        print(now.time())
-        print(time(22,25,0))
-        if now.time() == time(22,25):
+        if now.time() == time(22,27):
             print("works")
             key = os.getenv("KEY")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
@@ -102,7 +100,6 @@ async def subsan():
                 if message.author == client.user:
                     su = message.content
             clinet.send_message(cient.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
-        await asyncio.sleep(0.5)
 
         
 
