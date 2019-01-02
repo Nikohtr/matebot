@@ -8,7 +8,7 @@ import urllib.request
 import json
 from discord.ext.commands import has_permissions
 from discord.ext.commands import has_role
-from datetime import datetime
+from datetime import datetime, time
 
 
 loop = True
