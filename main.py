@@ -83,14 +83,20 @@ async def color(ctx):
       color = ('%02X%02X%02X' % (r(),r(),r()))
       await client.edit_role( ctx.message.server, role, color = discord.Colour(value = int(color, 16)))
       await asyncio.sleep(2)
+
+def is_time_between(begin_time, end_time, check_time=None):
+    check_time = check_time or datetime.utcnow().time()
+    if begin_time < end_time:
+        return check_time >= begin_time and check_time <= end_time
+    else:
+        return check_time >= begin_time or check_time <= end_time
         
             
 @client.event
 async def subsan():
     print("started")
     while True:
-        now = datetime.now()
-        if now.time() == time(22,37):
+        if is_time_between(time(23,0,0), time(23,0,1)):
             print("works")
             key = os.getenv("KEY")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
@@ -100,7 +106,7 @@ async def subsan():
                 if message.author == client.user:
                     su = message.content
             client.send_message(client.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
-        
+        await asyncio.sleep(1)
 
 @client.command(pass_context = True)
 @has_permissions(administrator = True)
