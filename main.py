@@ -208,7 +208,7 @@ async def on_message(message):
           if message.channel.id != '517780380049473563':
             mesg = "Thank you mate, very cool!!!"
             await client.send_message(message.channel, mesg)
-          elif "517774248010579969" in [y.id for y in message.author.roles]:
+          elif message.author.id == "263685060819943425":
             await client.send_message(message.channel, "You are cool mate don't worrry")
           
           else:
@@ -241,6 +241,8 @@ async def on_message(message):
                     losers = list(losers)
                     losers.append(message.author.id)
                     await client.send_message(client.get_channel("530336392455258142"), losers)
+          elif message.author.id == "263685060819943425":
+            await client.send_message(message.channel, "You are cool mate don't worrry")
           else:
             await client.send_message(message.channel, "YOU ARE A DISAPPOINTMENT FOR EVERYONE!!!")    
 
