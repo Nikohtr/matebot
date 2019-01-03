@@ -110,16 +110,16 @@ async def subsan():
 @client.event
 async def losers():
     while True:
-        if is_time_between(time(20,59,0), time(20,59,1)):
+        if is_time_between(time(21,9,0), time(21,9,1)):
             async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
-                    losers = []
-                    losers.extend([message.content])
+                    losers = message.content
+                    losers.split(",")
                     print(losers)
             for item in losers:
                 print(item)
                 await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
-            await asyncio.sleep(1)
+        await asyncio.sleep(1)
             
 
 @client.command(pass_context = True)
