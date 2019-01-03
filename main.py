@@ -22,6 +22,7 @@ async def on_ready():
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
     client.loop.create_task(subsan())
+    client.loop.create_task(losers())
     
 @client.command(pass_context = True)
 async def esay(ctx, *, mg = None):
@@ -109,7 +110,7 @@ async def subsan():
 @client.event
 async def losers():
     while True:
-        if is_time_between(time(20,13,0), time(20,13,1)):
+        if is_time_between(time(20,16,0), time(20,16,1)):
             async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
                     losers = message.content
