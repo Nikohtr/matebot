@@ -208,7 +208,7 @@ async def on_message(message):
           if message.channel.id != '517780380049473563':
             mesg = "Thank you mate, very cool!!!"
             await client.send_message(message.channel, mesg)
-          elif not "517774248010579969" in message.author.roles:
+          elif "517774248010579969" in [y.id for y in message.author.roles]:
             await client.send_message(message.channel, "You are cool mate don't worrry")
           
           else:
