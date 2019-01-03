@@ -113,10 +113,10 @@ async def losers():
         if is_time_between(time(21,16,0), time(21,16,1)):
             async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
-                    losers = message.content
-                    losers.split(",")
+                    loser = message.content
+                    loser = loser.split(",")
                     print(losers)
-            for item in losers:
+            for item in loser:
                 print(item)
                 await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
         await asyncio.sleep(1)
