@@ -109,13 +109,13 @@ async def subsan():
 @client.event
 async def losers():
     while True:
-        if is_time_between(time(11,39,0), time(11,39,1)):
+        if is_time_between(time(19,0,0), time(19,0,1)):
             async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
                     losers = message.content
                     losers = list(losers)
             for items in losers:
-                await client.send_message(items , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
+                await client.send_message(await client.get_user_info(items) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
             
             
 
