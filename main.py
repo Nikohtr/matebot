@@ -95,7 +95,7 @@ def is_time_between(begin_time, end_time, check_time=None):
 @client.event
 async def subsan():
     while True:
-        if is_time_between(time(22,0,0), time(22,0,1)):
+        if is_time_between(time(19,0,0), time(19,0,1)):
             key = os.getenv("KEY")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
