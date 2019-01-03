@@ -107,18 +107,18 @@ async def subsan():
             await client.send_message(client.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
         await asyncio.sleep(1)
         
-@client.event
-async def losers():
-    while True:
-        if is_time_between(time(20,24,0), time(20,24,1)):
-            async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
-                if message.author == client.user:
-                    losers = [message.content]
-                    print(losers)
-            for items in losers:
-                print(items)
-                await client.send_message(await client.get_user_info(items) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
-            await asyncio.sleep(1)
+# @client.event
+# async def losers():
+#     while True:
+#         if is_time_between(time(20,24,0), time(20,24,1)):
+#             async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
+#                 if message.author == client.user:
+#                     losers = [message.content]
+#                     print(losers)
+#             for items in losers:
+#                 print(items)
+#                 await client.send_message(await client.get_user_info(items) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
+#             await asyncio.sleep(1)
             
 
 @client.command(pass_context = True)
