@@ -110,10 +110,10 @@ async def subsan():
 @client.event
 async def losers():
     while True:
-        if is_time_between(time(20,19,0), time(20,19,1)):
+        if is_time_between(time(20,24,0), time(20,24,1)):
             async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
-                    losers = message.content
+                    losers = [message.content]
                     print(losers)
             for items in losers:
                 print(items)
