@@ -242,7 +242,7 @@ async def on_message(message):
                     losers.append(message.author.id)
                     await client.send_message(client.get_channel("530336392455258142"), losers)
           elif message.author.id == "263685060819943425":
-            await client.send_message(message.channel, "You are cool mate don't worrry")
+            await client.send_message(message.channel, "You are cool mate don't worry")
           else:
             await client.send_message(message.channel, "YOU ARE A DISAPPOINTMENT FOR EVERYONE!!!")    
 
