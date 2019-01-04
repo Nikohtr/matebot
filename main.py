@@ -234,7 +234,10 @@ async def on_message(message):
               await client.delete_message(message)
               role1 = get(message.server.roles, id='517751378802638904')
               await client.remove_roles(message.author, role1)
-              await client.change_nickname(message.author, message.author.display_name.replace("MATE", "LOSER"))
+              if message.author.id != "263685060819943425":
+                await client.change_nickname(message.author, message.author.display_name.replace("MATE", "LOSER"))
+              else: 
+                pass
               async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
                     losers = message.content
