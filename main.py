@@ -238,9 +238,9 @@ async def on_message(message):
                 await client.change_nickname(message.author, message.author.display_name.replace("MATE", "LOSER"))
               else: 
                 pass
-              async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
-                if message.author == client.user:
-                    losers = message.content
+              async for mesg in client.logs_from(client.get_channel("530336392455258142"), limit=1):
+                if mesg.author == client.user:
+                    losers = mesg.content
                     losers = losers+","+message.author.id
                     await client.send_message(client.get_channel("530336392455258142"), losers)
           elif message.author.id == "263685060819943425":
