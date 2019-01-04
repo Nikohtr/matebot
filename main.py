@@ -194,7 +194,7 @@ async def on_message(message):
     m = m.lower()
     await client.process_commands(message)
     if message.author != client.user:
-      if (message.content.startswith("+") and message.author.id == "263685060819943425"):
+      if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
         pass
       elif message.content=="+gap" or message.content=="+dislikes":
         pass
