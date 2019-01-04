@@ -238,8 +238,7 @@ async def on_message(message):
               async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
                     losers = message.content
-                    losers = list(losers)
-                    losers.append(message.author.id)
+                    losers = losers+","+message.author.id
                     await client.send_message(client.get_channel("530336392455258142"), losers)
           elif message.author.id == "263685060819943425":
             await client.send_message(message.channel, "You are cool mate don't worry")
