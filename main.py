@@ -145,11 +145,13 @@ async def sub():
     subsbefore = int(subspew)//100000
     print(subsbefore)
     while True:
+        print(subsbefore)
         data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
         subst = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
         subsnow = int(subspew)//100000
+        print(subsnow)
         if subsnow!=subsbefore:
             subsbefore+=1
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
