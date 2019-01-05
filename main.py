@@ -112,9 +112,9 @@ async def subsan():
             for item in loser:
                 print(item)
                 await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
-        await asyncio.sleep(1)
         elif is_time_between(time(15,0,0), time(15,0,1)):
             await client.send_message(await client.get_user_info('418380611233775626') , "Hey Berk I am just here to remind you that you are worth nothing and no one likes you becuase you are a noob. No one has ever liked you and no one will. You will die alone in some miserable house!")
+        await asyncio.sleep(1)
 
 @client.command(pass_context = True)
 @has_permissions(administrator = True)
