@@ -23,6 +23,7 @@ async def on_ready():
     client.loop.create_task(sub())
     client.loop.create_task(subsan())
     client.loop.create_task(losers())
+    client.loop.create_task(berk())
     
 @client.command(pass_context = True)
 async def esay(ctx, *, mg = None):
