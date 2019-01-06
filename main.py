@@ -108,7 +108,7 @@ async def subsan():
                 if message.author == client.user:
                     loser = message.content
                     loser = loser.split(",")
-                    print(losers)
+                    print(loser)
             for item in loser:
                 print(item)
                 await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
