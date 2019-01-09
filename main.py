@@ -103,7 +103,7 @@ async def subsan():
                 if message.author == client.user:
                     su = message.content
             await client.send_message(client.get_channel("529692628518830091"), subspew)
-            await client.send_message(client.get_channel("528874952342896640"), "PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
             async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
                 if message.author == client.user:
                     loser = message.content
@@ -129,19 +129,17 @@ async def stopcolor(ctx):
     
 @client.event
 async def sub():
-    key = os.getenv("KEY")
-    data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
-    subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-    subsbefore = int(subspew)//100000
-    print(subsbefore)
     while True:
         data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
         subst = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
         subsnow = int(subspew)//100000
+        async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
+                if message.author == client.user:
+                    subsbefore = int(message.content)
         if subsnow!=subsbefore:
-            subsbefore+=1
+            await client.send_message(client.get_channel("532571319196188712"), subsnow)
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
         if int(subst)>int(subspew):
             await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been past and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" \nSAD by xxxtentacion ")
