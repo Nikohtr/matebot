@@ -130,6 +130,7 @@ async def stopcolor(ctx):
 @client.event
 async def sub():
     while True:
+        key = os.getenv("KEY")
         data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
         subst = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
