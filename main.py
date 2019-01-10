@@ -176,9 +176,9 @@ async def on_member_remove(member):
 async def change_playing():
     global loop
     while loop:
-      await client.change_presence(game=discord.Game(name='SUBSCIBING TO PEWDIEPIE'))
+      await client.change_presence(game=discord.Game(name='SUBSCRIBING TO PEWDIEPIE'))
       await asyncio.sleep(10)
-      await client.change_presence(game=discord.Game(name='UNSUBSCIBING FROM T-SERIES'))
+      await client.change_presence(game=discord.Game(name='UNSUBSCRIBING FROM T-SERIES'))
       await asyncio.sleep(10)
   
 @client.event
