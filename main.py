@@ -247,4 +247,4 @@ async def on_message(message):
 
 
 token = os.getenv("DISCORD_BOT_SECRET")
-client.run(token, reconnect=True)
+client.run(token)
