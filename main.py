@@ -136,6 +136,7 @@ async def sub():
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
         subsnow = int(subspew)//100000
+        print(subspew+" not when announcned")
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
                 if message.author == client.user:
                     subsbefore = int(message.content)
