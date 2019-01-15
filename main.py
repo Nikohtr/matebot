@@ -143,7 +143,7 @@ async def sub():
             print(subspew1)
             await client.send_message(client.get_channel("532571319196188712"), subsnow)
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
-        if int(subst)>int(subspew):
+        if int(subst1)>int(subspew1):
             await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been past and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" \nSAD by xxxtentacion ")
         await asyncio.sleep(1)
 
