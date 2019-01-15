@@ -132,10 +132,10 @@ async def sub():
     while True:
         key = os.getenv("KEY")
         data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
-        subst = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
+        subst1 = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
-        subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-        subsnow = int(subspew)//100000
+        subspew1 = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+        subsnow = int(subspew1)//100000
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
                 if message.author == client.user:
                     subsbefore = int(message.content)
