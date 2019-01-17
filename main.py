@@ -139,7 +139,7 @@ async def sub():
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
                 if message.author == client.user:
                     subsbefore = int(message.content)
-        if subsnow!=subsbefore:
+        if subsnow>subsbefore:
             print(subspew1)
             await client.send_message(client.get_channel("532571319196188712"), subsnow)
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
