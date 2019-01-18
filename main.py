@@ -100,12 +100,12 @@ async def sub():
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
         subsnow = int(subspew)//100000
+        async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
+                if message.author == client.user:
+                    subsbefore = int(message.content)
         if is_time_between(time(19,0,0), time(19,0,1)):
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-            async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
-                if message.author == client.user:
-                    subsbefore = int(message.content)
             async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
                 if message.author == client.user:
                     su = message.content
