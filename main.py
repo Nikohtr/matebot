@@ -20,8 +20,7 @@ async def on_ready():
     print("I'm in")
     print(client.user)
     client.loop.create_task(change_playing())
-    client.loop.create_task(sub())
-    client.loop.create_task(subsan())
+    client.loop.create_task(loop())
     
 @client.command(pass_context = True)
 async def esay(ctx, *, mg = None):
@@ -93,7 +92,7 @@ def is_time_between(begin_time, end_time, check_time=None):
         
             
 @client.event
-async def subsan():
+async def loop():
     while True:
         key = os.getenv("KEY")
         data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
@@ -140,18 +139,7 @@ async def stopcolor(ctx):
     global lp
     lp = False
     await client.send_message(ctx.message.channel, "**Stoped rainbow colored roles!**")
-    
-@client.event
-async def sub():
-    while True:
-        key = os.getenv("KEY")
-        data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
-        subst1 = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
-        data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
-        subspew1 = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
       
-
-
 @client.command(pass_context = True)
 async def word(ctx, *, word=None):
     global loop
