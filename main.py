@@ -20,7 +20,7 @@ async def on_ready():
     print("I'm in")
     print(client.user)
     client.loop.create_task(change_playing())
-    client.loop.create_task(loop())
+    client.loop.create_task(sub())
     
 @client.command(pass_context = True)
 async def esay(ctx, *, mg = None):
@@ -92,7 +92,7 @@ def is_time_between(begin_time, end_time, check_time=None):
         
             
 @client.event
-async def loop():
+async def sub():
     while True:
         key = os.getenv("KEY")
         data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
