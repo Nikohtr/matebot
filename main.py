@@ -99,6 +99,9 @@ async def subsan():
             key = os.getenv("KEY")
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+            data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
+            subst = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
+            subsnow = int(subspew1)//100000
             async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
                 if message.author == client.user:
                     su = message.content
@@ -117,7 +120,16 @@ async def subsan():
                     print(item+" blocked me")
                     await client.send_message(client.get_channel("517780380049473563") , "<@"+item+"> You think blocking me can save you. Pathetic. Just a friendly reminder that no one likes you and you are a disappointment for your parents")
         elif is_time_between(time(15,0,0), time(15,0,1)):
-            await client.send_message(await client.get_user_info('418380611233775626') , "Hey Berk I am just here to remind you that you are worth nothing and no one likes you becuase you are a noob. No one has ever liked you and no one will. You will die alone in some miserable house!")
+            await client.send_message(await client.get_user_info('418380611233775626') , "Hey Berk I am just here to remind you that you are worth nothing and no one likes you becuase you are a noob. No one has ever liked you and no one will. You will die alone in some miserable house!"
+        async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
+                if message.author == client.user:
+                    subsbefore = int(message.content)
+        elif subsnow>subsbefore:
+            print(subspew)
+            await client.send_message(client.get_channel("532571319196188712"), subsnow)
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
+        elif int(subst)>int(subspew):
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been past and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" \nSAD by xxxtentacion ")
         await asyncio.sleep(1)
 
 @client.command(pass_context = True)
@@ -135,17 +147,7 @@ async def sub():
         subst1 = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew1 = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-        subsnow = int(subspew1)//100000
-        async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
-                if message.author == client.user:
-                    subsbefore = int(message.content)
-        if subsnow>subsbefore:
-            print(subspew1)
-            await client.send_message(client.get_channel("532571319196188712"), subsnow)
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
-        if int(subst1)>int(subspew1):
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been past and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" \nSAD by xxxtentacion ")
-        await asyncio.sleep(1)
+      
 
 
 @client.command(pass_context = True)
