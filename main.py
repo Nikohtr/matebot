@@ -21,8 +21,8 @@ async def on_ready():
     client.loop.create_task(sub())
     
 @client.command(pass_context = True)
+@commands.has_role('Owner')
 async def esay(ctx, *, mg = None):
-    if ctx.message.author.id == "263685060819943425":
       await client.delete_message(ctx.message)
 
       if not mg: await client.say("Please specify a message to send")
@@ -50,8 +50,8 @@ async def dislikes():
     await client.say("Youtube Rewind 2018 has {:,d}".format(int(dis))+" dislikes. That's {:,d}".format(int(raz))+" above Justin Bieber's Baby")
 
 @client.command(pass_context = True)
+@commands.has_role('Owner')
 async def say(ctx, *, mg = None):
-    if ctx.message.author.id == "263685060819943425":
       await client.delete_message(ctx.message)
 
       if not mg: await client.say("Please specify a message to send")
@@ -68,7 +68,7 @@ lp = True
 
 
 @client.command(pass_context = True)
-@has_permissions(administrator = True)
+@commands.has_role('Owner')
 async def color(ctx):
     global lp
     lp = True
@@ -131,16 +131,16 @@ async def sub():
         await asyncio.sleep(1)
 
 @client.command(pass_context = True)
-@has_permissions(administrator = True)
+@commands.has_role('Owner')
 async def stopcolor(ctx):
     global lp
     lp = False
     await client.send_message(ctx.message.channel, "**Stoped rainbow colored roles!**")
       
 @client.command(pass_context = True)
+@commands.has_role('Owner')
 async def word(ctx, *, word=None):
-    global loop
-    if ctx.message.author.id == "263685060819943425":
+      global loop
       await client.send_message(ctx.message.channel, "Saying "+word+" 100,000 times")
       await client.delete_message(ctx.message)
       times = 2000//(len(word)+2)
