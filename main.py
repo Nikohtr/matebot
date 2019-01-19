@@ -44,7 +44,7 @@ async def play(ctx, *, url = None):
         player.start()
         
 @client.command(pass_context=True)
-async def stop(ctx)
+async def stop(ctx):
         await client.disconnect()
 
 
