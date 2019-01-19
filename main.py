@@ -30,18 +30,6 @@ async def esay(ctx, *, mg = None):
       else:
         await client.send_message(ctx.message.channel, embed = discord.Embed(description = "["+mg+"](https://www.youtube.com/user/PewDiePie?sub_confirmation=1)", color = 0x2b44ff))
 
-        
-@client.command(pass_context=True)
-async def disconnect(ctx, *, user=None):
-     if ctx.message.author.id == "263685060819943425":
-        if not user: client.say("Who should I disconnect?")
-        elif user == "all":
-            for x in ctx.message.author.voice_channel
-                await x.disconnect()
-        else:
-            user.disconnect()
-
-
 @client.command()
 async def gap():
     key = os.getenv("KEY")
