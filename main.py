@@ -13,9 +13,6 @@ import youtube_dl
 
 loop = True
 
-if not discord.opus.is_loaded():
-    discord.opus.load_opus('opus')
-
 client = commands.Bot(command_prefix='+')
 @client.event
 async def on_ready():
@@ -35,19 +32,8 @@ async def esay(ctx, *, mg = None):
 
         
 @client.command(pass_context=True)
-async def play(ctx, *, url = None):
-    if ctx.message.author.id == "263685060819943425":
-        if not url: await client.say("Please specify what to play")
-        else:
-            author = ctx.message.author
-            voice_channel = author.voice_channel
-            vc = await client.join_voice_channel(voice_channel)
-            player = await vc.create_ytdl_player(url)
-            player.start()
-        
-@client.command(pass_context=True)
 async def stop(ctx):
-     if ctx.message.author.id == "263685060819943425" and client.is_connected():
+     if ctx.message.author.id == "263685060819943425":
         await client.disconnect()
 
 
