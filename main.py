@@ -32,9 +32,14 @@ async def esay(ctx, *, mg = None):
 
         
 @client.command(pass_context=True)
-async def stop(ctx):
+async def disconnect(ctx, *, user=None):
      if ctx.message.author.id == "263685060819943425":
-        await client.disconnect()
+        if not user: client.say("Who should I disconnect?")
+        elif user == "all":
+            for x in ctx.message.author.voice_channel
+                await x.disconnect()
+        else:
+            user.disconnect()
 
 
 @client.command()
