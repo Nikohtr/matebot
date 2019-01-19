@@ -10,7 +10,7 @@ from discord.ext.commands import has_permissions
 from discord.ext.commands import has_role
 from datetime import datetime, time
 import youtube_dl
-
+import pynacl
 
 loop = True
 
@@ -42,6 +42,10 @@ async def play(ctx, *, url = None):
         vc = await client.join_voice_channel(voice_channel)
         player = await vc.create_ytdl_player(url)
         player.start()
+        
+@client.command(pass_context=True)
+async def stop(ctx)
+        await client.disconnect()
 
 
 @client.command()
