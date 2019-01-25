@@ -78,7 +78,7 @@ async def unban(ctx, user = None):
     if user == None: await client.say("Tell me who to unban")
     else: 
         user = await client.get_user_info(user)
-        await client.unban(user)
+        await client.unban(ctx.message.server, user)
         await client.say("**Unbanned {0}**".format(user))
         
         
