@@ -68,14 +68,16 @@ async def joined_at(ctx, member: discord.Member = None):
 @commands.has_role("Owner")
 async def ban(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to ban")
-    else: await client.ban(user, 7)
+    else: 
+        await client.ban(user, 7)
         await client.say("**Banned {0}**".format(user))
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def unban(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to unban")
-    else: await client.unban(user, 7)
+    else: 
+        await client.unban(user, 7)
         await client.say("**Unbanned {0}**".format(user))
         
         
@@ -83,7 +85,8 @@ async def unban(ctx, user: discord.Member = None):
 @commands.has_role("Owner")
 async def kick(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to kick")
-    else: await client.kick(user)
+    else: 
+        await client.kick(user)
         await client.say("**Kicked {0}**".format(user))
         
         
