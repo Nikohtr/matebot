@@ -101,7 +101,7 @@ async def clear(ctx, *, number = None):
                     mgs.append(x)
                 await client.delete_messages(mgs)
             mgs.clear
-        except HTTPException:
+        except discord.ext.commands.errors.CommandInvokeError:
             await client.say("There was an error! Messages are most likely older than 14 days")
                 
             
@@ -230,9 +230,9 @@ async def on_message(message):
     m = m.lower()
     await client.process_commands(message)
     if message.author != client.user:
-      if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
-        pass
-      elif message.content=="+gap" or message.content=="+dislikes":
+#       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
+#         pass
+      if message.content=="+gap" or message.content=="+dislikes":
         pass
       elif isEnglish(message.content):
         await client.delete_message(message)
