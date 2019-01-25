@@ -75,7 +75,7 @@ async def unban(ctx, user: discord.Member = None):
 @commands.has_role("Owner")
 async def kick(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to kick")
-    else: await client.kick(user, 7)
+    else: await client.kick(user)
         
         
 @client.command(pass_context = True)
