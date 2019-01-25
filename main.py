@@ -73,7 +73,7 @@ async def kick(ctx, user: discord.member = None):
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
-async def clear(ctx, number = None):
+async def clear(ctx, *, number = None):
     if not number or not number.isdigit(): client.say("Tell me how many messages to delete")
     else:
         msg = []
@@ -82,13 +82,13 @@ async def clear(ctx, number = None):
             times = number//100
         else: times = 1
         for i in range(times):
-            async for x in Client.logs_from(ctx.message.channel, limit = times*100):
+            async for x in client.logs_from(ctx.message.channel, limit = times*100):
                 mgs.append(x)
-            await Client.delete_messages(mgs)
+            await client.delete_messages(mgs)
             msg.clear()
-        async for x in Client.logs_from(ctx.message.channel, limit = number-(times*100)):
+        async for x in client.logs_from(ctx.message.channel, limit = number-(times*100)):
             mgs.append(x)
-        await Client.delete_messages(mgs)
+        await client.delete_messages(mgs)
                 
             
 
