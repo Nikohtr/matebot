@@ -197,9 +197,9 @@ async def sub():
         await asyncio.sleep(1)
         
         
-@client.command(pass_contrxt = True)
+@client.command(pass_context = True)
 @commands.has_role('Owner')
-async def subs(context, *, user):
+async def subs(ctx, *, user):
     key = os.getenv("KEY")
     data2 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+user+"&key="+key).read()
     subs = json.loads(data2)["items"][0]["statistics"]["subscriberCount"]
