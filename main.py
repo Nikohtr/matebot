@@ -118,6 +118,7 @@ async def clear(ctx, *, number = None):
                     mgs.append(x)
                 await client.delete_messages(mgs)
             mgs.clear
+            await client.send_message(client.get_channel("517753229258391567"), embed = discord.Embed(description ="Bulk delete by **"+str(ctx.message.author)+"** in **"+str(ctx.message.channel)+"**. **"+str(number)+"** messages were deleted", color = 0x2b44ff))
         except discord.errors.HTTPException:
             await client.say("There was an error! Messages are most likely older than 14 days")
                 
@@ -197,13 +198,6 @@ async def sub():
         await asyncio.sleep(1)
         
         
-@client.command(pass_context = True)
-@commands.has_role('Owner')
-async def subs(ctx, *, user):
-    key = os.getenv("KEY")
-    data2 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+user+"&key="+key).read()
-    subs = json.loads(data2)["items"][0]["statistics"]["subscriberCount"]
-    await client.say(user +" has {:,d}".format(int(subs)))
 
 @client.command(pass_context = True)
 @commands.has_role('Owner')
