@@ -61,14 +61,21 @@ async def say(ctx, *, mg = None):
 @commands.has_role("Owner")
 async def ban(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to ban")
-    else: client.ban(user, 7)
+    else: await client.ban(await client.get_user_info(user), 7)
+        
+        
+@client.command(pass_context = True)
+@commands.has_role("Owner")
+async def unban(ctx, user: discord.Member = None):
+    if user == None: await client.say("Tell me who to unban")
+    else: await client.unban(await client.get_user_info(user), 7)
         
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def kick(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to kick")
-    else: client.kick(user, 7)
+    else: await client.kick(await client.get_user_info(user), 7)
         
         
 @client.command(pass_context = True)
