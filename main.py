@@ -62,7 +62,7 @@ async def joined_at(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.message.author
 
-    await bot.say('{0} joined at {0.joined_at}'.format(member))
+    await client.say('{0} joined at {0.joined_at}'.format(member))
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
