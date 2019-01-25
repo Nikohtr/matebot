@@ -83,23 +83,26 @@ async def kick(ctx, user: discord.Member = None):
 async def clear(ctx, *, number = None):
     if not number or not number.isdigit(): await client.send_message(ctx.message.channel, "Tell me how many messages to delete")
     else:
-        mgs = []
-        number = int(number)+1
-        if number>100:
-            times = number//100
-            for i in range(times):
-                async for x in client.logs_from(ctx.message.channel, limit = 100):
+        try:
+            mgs = []
+            number = int(number)+1
+            if number>100:
+                times = number//100
+                for i in range(times):
+                    async for x in client.logs_from(ctx.message.channel, limit = 100):
+                        mgs.append(x)
+                    await client.delete_messages(mgs)
+                    mgs.clear()
+                async for x in client.logs_from(ctx.message.channel, limit = number-(times*100)):
                     mgs.append(x)
                 await client.delete_messages(mgs)
-                mgs.clear()
-            async for x in client.logs_from(ctx.message.channel, limit = number-(times*100)):
-                mgs.append(x)
-            await client.delete_messages(mgs)
-        else:
-            async for x in client.logs_from(ctx.message.channel, limit = number):
-                mgs.append(x)
-            await client.delete_messages(mgs)
-        mgs.clear
+            else:
+                async for x in client.logs_from(ctx.message.channel, limit = number):
+                    mgs.append(x)
+                await client.delete_messages(mgs)
+            mgs.clear
+        except HTTPException:
+            await client.say("There was an error! Messages are most likely older than 14 days")
                 
             
 
