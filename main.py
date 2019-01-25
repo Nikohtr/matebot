@@ -77,7 +77,8 @@ async def ban(ctx, user: discord.Member = None):
 async def unban(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to unban")
     else: 
-        await client.unban(await client.get_user_info(user), 7)
+        user = await client.get_user_info(user)
+        await client.unban(user, 7)
         await client.say("**Unbanned {0}**".format(user))
         
         
@@ -113,7 +114,7 @@ async def clear(ctx, *, number = None):
                     mgs.append(x)
                 await client.delete_messages(mgs)
             mgs.clear
-        except discord.ext.commands.errors.CommandInvokeError:
+        except discord.errors.HTTPException:
             await client.say("There was an error! Messages are most likely older than 14 days")
                 
             
