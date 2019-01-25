@@ -82,7 +82,7 @@ async def unban(ctx, user = None):
             await client.unban(ctx.message.server, user)
             await client.say("**Unbanned {0}**".format(user))
         except discord.errors.NotFound:
-            client.say("I can't find that guy")
+            await client.say("I can't find that guy")
         
         
 @client.command(pass_context = True)
