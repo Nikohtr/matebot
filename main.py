@@ -256,7 +256,7 @@ async def change_playing():
 @client.event
 async def on_message_edit(old, new):
     await on_message(new)
-    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+str(new.author)+" in "+str(new.channel)+"was edited\n Old \n"+str(old)+"\n new \n"+str(new))
+    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+str(new.author)+" in "+str(new.channel)+"was edited\n Old \n"+str(old.content)+"\n new \n"+str(new.content))
 
 
 @client.event
