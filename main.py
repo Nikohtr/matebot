@@ -76,7 +76,7 @@ async def kick(ctx, user: discord.member = None):
 async def clear(ctx, *, number = None):
     if not number or not number.isdigit(): await client.send_message(ctx.message.channel, "Tell me how many messages to delete")
     else:
-        msg = []
+        mgs = []
         number = int(number)+1
         if number>100:
             times = number//100
