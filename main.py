@@ -58,6 +58,7 @@ async def say(ctx, *, mg = None):
       else: await client.say(mg)
         
 @client.command(pass_context=True)
+@commands.has_role('Owner')
 async def joined_at(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.message.author
@@ -194,6 +195,15 @@ async def sub():
         elif int(subst)>int(subspew):
             await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been passed and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" and the time was "+str(datetime.time)+" \nSAD by xxxtentacion ")
         await asyncio.sleep(1)
+        
+        
+@client.command(pass_contrxt = True)
+@commands.has_role('Owner')
+async def subs(context, *, user):
+    key = os.getenv("KEY")
+    data2 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+user+"&key="+key).read()
+    subs = json.loads(data2)["items"][0]["statistics"]["subscriberCount"]
+    client.say(user +" has {:,d}".format(subs))
 
 @client.command(pass_context = True)
 @commands.has_role('Owner')
@@ -269,7 +279,7 @@ async def on_message(message):
     if message.author != client.user:
       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
         pass
-      elif message.content=="+gap" or message.content=="+dislikes" or message.content == "+joined_at":
+      elif message.content=="+gap" or message.content=="+dislikes":
         pass
       elif isEnglish(message.content):
         await client.delete_message(message)
