@@ -241,7 +241,7 @@ async def on_member_join(member):
     
 @client.event
 async def on_message_delete(message):
-    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+str(message.author)+" was deleted in "+str(message.channel)+"\n"+message.content)
+    await client.send_message(client.get_channel("517753229258391567"), embed = discord.Embed(description ="Message sent by "+str(message.author)+" was deleted in "+str(message.channel)+"\n\n"+message.content, color = 0x2b44ff))
     
 
 @client.event
@@ -256,7 +256,7 @@ async def change_playing():
 @client.event
 async def on_message_edit(old, new):
     await on_message(new)
-    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+str(new.author)+" in "+str(new.channel)+" was edited\n Old \n"+str(old.content)+"\n new \n"+str(new.content))
+    await client.send_message(client.get_channel("517753229258391567"), embed = discord.Embed(description ="Message sent by "+str(new.author)+" in "+str(new.channel)+" was edited\n\nOld \n"+str(old.content)+"\n\nNew \n"+str(new.content), color = 0x2b44ff))
 
 
 @client.event
