@@ -57,7 +57,7 @@ async def say(ctx, *, mg = None):
       if not mg: await client.say("Please specify a message to send")
       else: await client.say(mg)
         
-@bot.command(pass_context=True)
+@client.command(pass_context=True)
 async def joined_at(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.message.author
