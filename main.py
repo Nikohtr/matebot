@@ -74,7 +74,7 @@ async def kick(ctx, user: discord.member = None):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def clear(ctx, number = None):
-    if number == None or not numer.isdigits(): clent.say("Tell me how many messages to delete")
+    if number == None or not numer.isdigits(): client.say("Tell me how many messages to delete")
     else:
         msg = []
         number = int(number)+1
