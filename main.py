@@ -81,10 +81,10 @@ async def clear(ctx, *, number = None):
         if number>100:
             times = number//100
             for i in range(times):
-                async for x in client.logs_from(ctx.message.channel, limit = times*100):
+                async for x in client.logs_from(ctx.message.channel, limit = 100):
                     mgs.append(x)
                 await client.delete_messages(mgs)
-                msg.clear()
+                mgs.clear()
             async for x in client.logs_from(ctx.message.channel, limit = number-(times*100)):
                 mgs.append(x)
             await client.delete_messages(mgs)
@@ -92,7 +92,7 @@ async def clear(ctx, *, number = None):
             async for x in client.logs_from(ctx.message.channel, limit = number):
                 mgs.append(x)
             await client.delete_messages(mgs)
-        msg.clear
+        mgs.clear
                 
             
 
