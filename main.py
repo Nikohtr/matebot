@@ -241,7 +241,7 @@ async def on_member_join(member):
     
 @client.event
 async def on_message_delete(message):
-    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+message.author+" was deleted in "+message.channel+"\n"+message)
+    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+str(message.author)+" was deleted in "+str(message.channel)+"\n"+message.content)
     
 
 @client.event
@@ -256,7 +256,7 @@ async def change_playing():
 @client.event
 async def on_message_edit(old, new):
     await on_message(new)
-    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+message.author+" in "+message.channel+"was edited\n Old \n"+old+"\n new \n"+new)
+    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+str(message.author)+" in "+str(message.channel)+"was edited\n Old \n"+str(old)+"\n new \n"+str(new))
 
 
 @client.event
