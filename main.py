@@ -227,6 +227,23 @@ async def word(ctx, *, word=None):
 async def on_member_remove(member):
     await client.send_message(client.get_channel('517765643114643457'),member.display_name+" wasn't a real mate so he left. HAHA WHAT A NOOB!!!")
 
+    
+@client.event
+async def on_member_join(member):
+    await client.say("{0.mention} I slid in them DMs go there to get access!".format(member))
+    await client.send_message(await client.get_user_info(member), "Hey what's your name?")
+    name = await client.wait_for_message(author = member)
+    name = name.content
+    await client.send_message(await client.get_user_info(member), "Thanks MATE "+name)
+    role1 = get(message.server.roles, id='517751378802638904')
+    await client.add_roles(message.author, role1)
+    await client.change_nickname(message.author, "MATE "+name )
+    
+@client.event
+async def on_message_delete(message):
+    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+message.author+" was deleted in "+message.channel+"\n"+message)
+    
+
 @client.event
 async def change_playing():
     global loop
@@ -239,6 +256,8 @@ async def change_playing():
 @client.event
 async def on_message_edit(old, new):
     await on_message(new)
+    await client.send_message(client.get_channel("517753229258391567"), "Message sent by "+message.author+" in "+message.channel+"was edited\n Old \n"+old+"\n new \n"+new)
+
 
 @client.event
 async def on_message(message):
