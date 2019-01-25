@@ -56,6 +56,41 @@ async def say(ctx, *, mg = None):
 
       if not mg: await client.say("Please specify a message to send")
       else: await client.say(mg)
+        
+@client.command(pass_context = True)
+@commands.has_role("Owner")
+async def ban(ctx, user: discord.member = None):
+    if user == None: clent.say("Tell me who to ban")
+    else: client.ban(user, 7)
+        
+        
+@client.command(pass_context = True)
+@commands.has_role("Owner")
+async def kick(ctx, user: discord.member = None):
+    if user == None: clent.say("Tell me who to kick")
+    else: client.kick(user, 7)
+        
+        
+@client.command(pass_context = True)
+@commands.has_role("Owner")
+async def clear(ctx, number = None):
+    if number == None or not numer.isdigits(): clent.say("Tell me how many messages to delete")
+    else:
+        msg = []
+        number = int(number)+1
+        if number>100:
+            times = number//100
+        else: times = 1
+        for i in range(times)
+            async for x in Client.logs_from(ctx.message.channel, limit = times*100):
+                mgs.append(x)
+            await Client.delete_messages(mgs)
+            msg.clear()
+        async for x in Client.logs_from(ctx.message.channel, limit = number-(times*100)):
+            mgs.append(x)
+        await Client.delete_messages(mgs)
+                
+            
 
 def isEnglish(s):
     try:
