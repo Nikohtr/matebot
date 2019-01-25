@@ -203,7 +203,7 @@ async def subs(ctx, *, user):
     key = os.getenv("KEY")
     data2 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+user+"&key="+key).read()
     subs = json.loads(data2)["items"][0]["statistics"]["subscriberCount"]
-    client.say(user +" has {:,d}".format(int(subs)))
+    await client.say(user +" has {:,d}".format(int(subs)))
 
 @client.command(pass_context = True)
 @commands.has_role('Owner')
