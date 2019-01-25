@@ -74,7 +74,7 @@ async def ban(ctx, user: discord.Member = None):
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
-async def unban(ctx, user: discord.Member = None):
+async def unban(ctx, user = None):
     if user == None: await client.say("Tell me who to unban")
     else: 
         user = await client.get_user_info(user)
