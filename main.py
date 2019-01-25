@@ -69,13 +69,14 @@ async def joined_at(ctx, member: discord.Member = None):
 async def ban(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to ban")
     else: await client.ban(user, 7)
-        
+        await client.say("**Banned {0}**".format(user))
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def unban(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to unban")
     else: await client.unban(user, 7)
+        await client.say("**Unbanned {0}**".format(user))
         
         
 @client.command(pass_context = True)
@@ -83,6 +84,7 @@ async def unban(ctx, user: discord.Member = None):
 async def kick(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to kick")
     else: await client.kick(user)
+        await client.say("**Kicked {0}**".format(user))
         
         
 @client.command(pass_context = True)
@@ -237,9 +239,9 @@ async def on_message(message):
     m = m.lower()
     await client.process_commands(message)
     if message.author != client.user:
-#       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
-#         pass
-      if message.content=="+gap" or message.content=="+dislikes":
+      if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
+        pass
+      elif message.content=="+gap" or message.content=="+dislikes" or message.content == "+joined_at":
         pass
       elif isEnglish(message.content):
         await client.delete_message(message)
