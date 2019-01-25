@@ -77,7 +77,7 @@ async def ban(ctx, user: discord.Member = None):
 async def unban(ctx, user: discord.Member = None):
     if user == None: await client.say("Tell me who to unban")
     else: 
-        await client.unban(user, 7)
+        await client.unban(await client.get_user_info(user), 7)
         await client.say("**Unbanned {0}**".format(user))
         
         
