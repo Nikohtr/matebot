@@ -25,7 +25,7 @@ async def on_ready():
 def should_mod(channelid):
     async for q in client.logs_from(client.get_channel("538382600981446656"), limit=1):
         if q.author == client.user:
-            mod = ast.literal_eval(q.content)
+            mod = eval(q.content)
             print(type(mod))
     return mod[channelid]
 
