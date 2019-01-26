@@ -13,12 +13,15 @@ import ast
 
 loop = True
 
-for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
-    if message.author == client.user:
-        mod = ast.literal_eval(message.content)
+
 
 
 client = commands.Bot(command_prefix='+')
+
+for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+    if message.author == client.user:
+        mod = ast.literal_eval(message.content)
+        
 @client.event
 async def on_ready():
     print("I'm in")
