@@ -276,6 +276,7 @@ async def on_message(message):
     m = message.content
     m = m.lower()
     await client.process_commands(message)
+    global mod
     if message.author != client.user:  
       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
         pass
