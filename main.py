@@ -289,7 +289,7 @@ async def on_message(message):
         await client.send_message(message.channel, "That's not very nice you know. I only understand English")
       elif message.channel.type == discord.ChannelType.private:
         await client.send_message(message.channel, "Nah I don't like speaking in DMs")
-      elif not should_mod(message.channel.id):
+      elif not await should_mod(message.channel.id):
         pass
       else:    
         if "mate" in m or "m8" in m or ":mate:" in m or message.attachments:
