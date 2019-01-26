@@ -21,7 +21,6 @@ async def on_ready():
     async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
         if message.author == client.user:
             mod = ast.literal_eval(message.content)
-            print(mod)
             type(mod)
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
