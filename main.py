@@ -274,6 +274,7 @@ async def on_message(message):
     async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
         if message.author == client.user:
             mod = ast.literal_eval(message.content)
+    print(mod)
     await client.process_commands(message)
     if message.author != client.user:
       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
@@ -286,6 +287,7 @@ async def on_message(message):
       elif message.channel.type == discord.ChannelType.private:
         await client.send_message(message.channel, "Nah I don't like speaking in DMs")
       elif not mod[message.channel.id]:
+        print(mod[message.channel.id])
         pass
       else:    
         if "mate" in m or "m8" in m or ":mate:" in m or message.attachments:
