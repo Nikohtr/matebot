@@ -14,9 +14,7 @@ import ast
 loop = True
 
 
-async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
-    if message.author == client.user:
-        mod = ast.literal_eval(message.content)
+
 
 client = commands.Bot(command_prefix='+')
 @client.event
@@ -25,6 +23,9 @@ async def on_ready():
     print(client.user)
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
+    async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+        if message.author == client.user:
+            mod = ast.literal_eval(message.content)
     
 @client.command(pass_context = True)
 @commands.has_role('Owner')
