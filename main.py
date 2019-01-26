@@ -9,8 +9,14 @@ import json
 from discord.ext.commands import has_permissions
 from discord.ext.commands import has_role
 from datetime import datetime, time
+import ast
 
 loop = True
+
+
+async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+    if message.author == client.user:
+        mod = ast.literal_eval(message.content)
 
 client = commands.Bot(command_prefix='+')
 @client.event
@@ -269,6 +275,7 @@ async def on_message_edit(old, new):
 async def on_message(message):
     m = message.content
     m = m.lower()
+    global mod
     await client.process_commands(message)
     if message.author != client.user:
       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
@@ -280,6 +287,8 @@ async def on_message(message):
         await client.send_message(message.channel, "That's not very nice you know. I only understand English")
       elif message.channel.type == discord.ChannelType.private:
         await client.send_message(message.channel, "Nah I don't like speaking in DMs")
+      elif not mod[message.channel.id]:
+        pass
       else:    
         if "mate" in m or "m8" in m or ":mate:" in m or message.attachments:
           if message.channel.id != '517780380049473563':
