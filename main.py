@@ -13,15 +13,7 @@ import ast
 
 loop = True
 
-
-
-
-client = commands.Bot(command_prefix='+')
-
-async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
-    if message.author == client.user:
-        mod = ast.literal_eval(message.content)
-        
+client = commands.Bot(command_prefix='+')        
 @client.event
 async def on_ready():
     print("I'm in")
@@ -279,7 +271,9 @@ async def on_message_edit(old, new):
 async def on_message(message):
     m = message.content
     m = m.lower()
-    global mod
+    async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+        if message.author == client.user:
+            mod = ast.literal_eval(message.content)
     await client.process_commands(message)
     if message.author != client.user:
       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
