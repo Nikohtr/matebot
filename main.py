@@ -267,7 +267,7 @@ async def on_message_edit(old, new):
         await client.send_message(client.get_channel("517753229258391567"), embed = discord.Embed(description ="Message sent by **"+str(new.author)+"** in **"+str(new.channel)+"** was edited\n\nOld \n**"+str(old.content)+"**\n\nNew \n**"+str(new.content)+"**", color = 0x2b44ff))
 
 def should_mod(channelid):
-    q = client.logs_from(client.get_channel("538382600981446656"), limit=1):
+    q = client.logs_from(client.get_channel("538382600981446656"), limit=1)
     if q.author == client.user:
         mod = eval(q.content)
         print(type(mod))
