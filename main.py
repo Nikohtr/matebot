@@ -268,9 +268,10 @@ async def on_message_edit(old, new):
 
 def should_mod(channelid):
     q = client.logs_from(client.get_channel("538382600981446656"), limit=1)
-    print(q)
-    mod = eval(q.content)
-    print(type(mod))
+    for msg in q
+        print(msg)
+        mod = eval(msg.content)
+        print(type(mod))
     return mod[channelid]
 
 @client.event
