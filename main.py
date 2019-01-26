@@ -18,6 +18,10 @@ client = commands.Bot(command_prefix='+')
 async def on_ready():
     print("I'm in")
     print(client.user)
+    async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+        if message.author == client.user:
+            mod = ast.literal_eval(message.content)
+            print(mod)
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
 
@@ -272,11 +276,7 @@ async def on_message(message):
     m = message.content
     m = m.lower()
     await client.process_commands(message)
-    if message.author != client.user:
-      async for message in client.logs_from(client.get_channel("538382600981446656"), limit=1):
-        if message.author == client.user:
-            mod = ast.literal_eval(message.content)
-            print(mod)  
+    if message.author != client.user:  
       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
         pass
       elif message.content=="+gap" or message.content=="+dislikes":
