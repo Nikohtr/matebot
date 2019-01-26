@@ -22,6 +22,7 @@ async def on_ready():
         if message.author == client.user:
             mod = ast.literal_eval(message.content)
             print(mod)
+            type(mod)
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
 
