@@ -19,7 +19,7 @@ async def on_ready():
     print("I'm in")
     print(client.user)
     client.loop.create_task(change_playing())
-    client.loop.create_task(sub())
+    await sub()
     
        
 @client.command(pass_context = True)
@@ -126,7 +126,7 @@ async def clear(ctx, *, number = None):
                 
             
 
-def isEnglish(s):
+async def isEnglish(s):
     try:
         s.encode(encoding='utf-8').decode('ascii')
     except UnicodeDecodeError:
@@ -149,7 +149,7 @@ async def color(ctx):
       await client.edit_role( ctx.message.server, role, color = discord.Colour(value = int(color, 16)))
       await asyncio.sleep(2)
 
-def is_time_between(begin_time, end_time, check_time=None):
+async def is_time_between(begin_time, end_time, check_time=None):
     check_time = check_time or datetime.utcnow().time()
     if begin_time < end_time:
         return check_time >= begin_time and check_time <= end_time
@@ -169,7 +169,7 @@ async def sub():
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
                 if message.author == client.user:
                     subsbefore = int(message.content)
-        if is_time_between(time(19,0,0), time(19,0,1)):
+        if await is_time_between(time(19,0,0), time(19,0,1)):
             data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
             subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
             async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
@@ -189,7 +189,7 @@ async def sub():
                 except discord.Forbidden:
                     print(item+" blocked me")
                     await client.send_message(client.get_channel("517780380049473563") , "<@"+item+"> You think blocking me can save you. Pathetic. Just a friendly reminder that no one likes you and you are a disappointment for your parents")
-        elif is_time_between(time(15,0,0), time(15,0,1)):
+        elif await is_time_between(time(15,0,0), time(15,0,1)):
             await client.send_message(await client.get_user_info('418380611233775626') , "Hey Berk I am just here to remind you that you are worth nothing and no one likes you becuase you are a noob. No one has ever liked you and no one will. You will die alone in some miserable house!")
         elif subsnow>subsbefore:
             print(subspew)
@@ -282,7 +282,7 @@ async def on_message(message):
         pass
       elif message.content=="+gap" or message.content=="+dislikes":
         pass
-      elif isEnglish(message.content):
+      elif await isEnglish(message.content):
         await client.delete_message(message)
         await client.send_message(message.channel, "That's not very nice you know. I only understand English")
       elif message.channel.type == discord.ChannelType.private:
