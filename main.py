@@ -312,7 +312,7 @@ async def mod(ctx, channel = None):
             mod[x] = True
         await client.say("Done")
         await client.send_message(client.get_channel("538382600981446656"), mod)
-    elif channel != discord.Channel:
+    elif not isinstance(channel, discord.Channel):
         await client.say("That's not a channel!")
     else:
         mod[channel.id] = True
@@ -331,7 +331,7 @@ async def nomod(ctx, channel = None):
         for x in mod:
             mod[x] = False
         await client.say("Done")
-    elif channel != discord.Channel:
+    elif not isinstance(channel, discord.Channel):
         await client.say("That's not a channel!")
     else:
         mod[channel.id] = False
