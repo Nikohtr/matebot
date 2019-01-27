@@ -277,7 +277,8 @@ async def on_channel_create(channel):
     async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
         if msg.author == client.user:
             mod = eval(msg.content)
-    client.send_message(channel, "Should I mod this?")
+    mod[channel.id] = False
+    await client.send_message(channel, "Should I mod this?")
     ans = await client.wait_for_message(author = await client.get_user_info("263685060819943425"))
     ans = ans.content
     ans = ans.lower()
@@ -308,13 +309,13 @@ async def mod(ctx, channel = None):
     if channel == "all":
         for x in mod:
             mod[x] = True
-        client.say("Done")
+        await client.say("Done")
         await client.send_message(client.get_channel("538382600981446656"), mod)
     elif channel != discord.Channel:
-        client.say("That's not a channel!")
+        await client.say("That's not a channel!")
     else:
         mod[channel.id] = True
-        client.say("Done")
+        await client.say("Done")
         await client.send_message(client.get_channel("538382600981446656"), mod)
 
 
@@ -328,12 +329,12 @@ async def nomod(ctx, channel = None):
     if channel == "all":
         for x in mod:
             mod[x] = False
-        client.say("Done")
+        await client.say("Done")
     elif channel != discord.Channel:
-        client.say("That's not a channel!")
+        await client.say("That's not a channel!")
     else:
         mod[channel.id] = False
-        client.say("Done")
+        await client.say("Done")
         await client.send_message(client.get_channel("538382600981446656"), mod)
     
     
