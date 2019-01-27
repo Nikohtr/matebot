@@ -272,12 +272,14 @@ async def should_mod(channelid):
             mod = eval(msg.content)
     return mod[channelid]
 q = False
+isitdone = False
 @client.event
 async def on_channel_create(channel):
     async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
         if msg.author == client.user:
             mod = eval(msg.content)
     global q
+    global isitdone
     q = True
     await client.send_message(channel, "Should I mod this?")
     ans = await client.wait_for_message(author = await client.get_user_info("263685060819943425"))
@@ -287,10 +289,16 @@ async def on_channel_create(channel):
     if ans == "y" or ans == "yes":
         mod[channel.id] = True
         await client.send_message(client.get_channel("538382600981446656"), mod)
+        await client.say("Ok I am gonna mod")
+        while not isitdone:
+            q=True
         q = False
     elif ans == "n" or ans == 'no':
         mod[channel.id] = False
         await client.send_message(client.get_channel("538382600981446656"), mod)
+        await client.say("Ok I am not gonna mod")
+        while not isitdone:
+            q=True
         q = False
     else:
         await on_channel_create(channel)
@@ -337,6 +345,8 @@ async def on_message(message):
     m = m.lower()
     await client.process_commands(message)
     global q
+    global isitdone
+    isitdone = False
     if message.author != client.user:  
       if (message.content.startswith("+") or message.content.startswith("?")) and message.author.id == "263685060819943425":
         pass
@@ -394,7 +404,8 @@ async def on_message(message):
           elif message.author.id == "263685060819943425":
             await client.send_message(message.channel, "You are cool mate don't worry")
           else:
-            await client.send_message(message.channel, "YOU ARE A DISAPPOINTMENT FOR EVERYONE!!!")    
+            await client.send_message(message.channel, "YOU ARE A DISAPPOINTMENT FOR EVERYONE!!!")
+    isitdone = True
 
 
 token = os.getenv("DISCORD_BOT_SECRET")
