@@ -280,6 +280,7 @@ async def on_channel_create(channel):
     client.send_message(channel, "Should I mod this?")
     ans = await client.wait_for_message(author = await client.get_user_info("263685060819943425"))
     ans = ans.content
+    ans = ans.lower()
     if ans == "y" or "yes":
         mod[channel.id] = True
     elif ans == "n" or 'no':
