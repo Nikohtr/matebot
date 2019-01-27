@@ -289,14 +289,14 @@ async def on_channel_create(channel):
     if ans == "y" or ans == "yes":
         mod[channel.id] = True
         await client.send_message(client.get_channel("538382600981446656"), mod)
-        await client.say("Ok I am gonna mod")
+        await client.send_message(channel, "Ok I am gonna mod")
         while not isitdone:
             q=True
         q = False
     elif ans == "n" or ans == 'no':
         mod[channel.id] = False
         await client.send_message(client.get_channel("538382600981446656"), mod)
-        await client.say("Ok I am not gonna mod")
+        await client.send_message(channel, "Ok I am not gonna mod")
         while not isitdone:
             q=True
         q = False
