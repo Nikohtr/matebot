@@ -337,6 +337,20 @@ async def nomod(ctx, channel: discord.Channel = None):
     await client.send_message(client.get_channel("538382600981446656"), mod)
     
     
+    
+@client.command(pass_context = True)
+@commands.has_role("Owner")
+async def ismod(ctx, channel: discord.Channel = None):
+    async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+            if msg.author == client.user:
+                mod = eval(msg.content)
+    if not channel: channel = ctx.message.channel
+    if mod[channel]:
+        client.say("Yes I moderate this channel")
+    else:
+        client.say("No I don't moderate this channel")
+    
+    
         
 
 @client.event
