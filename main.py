@@ -300,40 +300,40 @@ async def on_channel_delete(channel):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def mod(ctx, channel = None):
-async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
-        if msg.author == client.user:
-            mod = eval(msg.content)
-if not channel: channel = ctx.message.channel
-if channel == "all":
-    for x in mod:
-        mod[x] = True
-    client.say("Done")
-    await client.send_message(client.get_channel("538382600981446656"), mod)
-elif channel != discord.Channel:
-    client.say("That's not a channel!")
-else:
-    mod[channel.id] = True
-    client.say("Done")
-    await client.send_message(client.get_channel("538382600981446656"), mod)
-    
+    async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+            if msg.author == client.user:
+                mod = eval(msg.content)
+    if not channel: channel = ctx.message.channel
+    if channel == "all":
+        for x in mod:
+            mod[x] = True
+        client.say("Done")
+        await client.send_message(client.get_channel("538382600981446656"), mod)
+    elif channel != discord.Channel:
+        client.say("That's not a channel!")
+    else:
+        mod[channel.id] = True
+        client.say("Done")
+        await client.send_message(client.get_channel("538382600981446656"), mod)
+
 
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def nomod(ctx, channel = None):
-async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
-        if msg.author == client.user:
-            mod = eval(msg.content)
-if not channel: channel = ctx.message.channel
-if channel == "all":
-    for x in mod:
-        mod[x] = False
-    client.say("Done")
-elif channel != discord.Channel:
-    client.say("That's not a channel!")
-else:
-    mod[channel.id] = False
-    client.say("Done")
-    await client.send_message(client.get_channel("538382600981446656"), mod)
+    async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+            if msg.author == client.user:
+                mod = eval(msg.content)
+    if not channel: channel = ctx.message.channel
+    if channel == "all":
+        for x in mod:
+            mod[x] = False
+        client.say("Done")
+    elif channel != discord.Channel:
+        client.say("That's not a channel!")
+    else:
+        mod[channel.id] = False
+        client.say("Done")
+        await client.send_message(client.get_channel("538382600981446656"), mod)
     
     
         
