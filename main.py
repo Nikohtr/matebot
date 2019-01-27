@@ -286,12 +286,15 @@ async def on_channel_create(channel):
     print(ans)
     if ans == "y" or ans == "yes":
         mod[channel.id] = True
+        await client.send_message(client.get_channel("538382600981446656"), mod)
+        q = False
     elif ans == "n" or ans == 'no':
         mod[channel.id] = False
+        await client.send_message(client.get_channel("538382600981446656"), mod)
+        q = False
     else:
         await on_channel_create(channel)
-    await client.send_message(client.get_channel("538382600981446656"), mod)
-    q = False
+    
     
 @client.event
 async def on_channel_delete(channel):
@@ -304,41 +307,26 @@ async def on_channel_delete(channel):
     
 @client.command(pass_context = True)
 @commands.has_role("Owner")
-async def mod(ctx, channel = None):
+async def mod(ctx, channel: discord.Channel = None):
     async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
             if msg.author == client.user:
                 mod = eval(msg.content)
     if not channel: channel = ctx.message.channel
-    if channel == "all":
-        for x in mod:
-            mod[x] = True
-        await client.say("Done")
-        await client.send_message(client.get_channel("538382600981446656"), mod)
-    elif not isinstance(channel, discord.Channel):
-        await client.say("That's not a channel!")
-    else:
-        mod[channel.id] = True
-        await client.say("Done")
-        await client.send_message(client.get_channel("538382600981446656"), mod)
+    mod[channel.id] = True
+    await client.say("Done")
+    await client.send_message(client.get_channel("538382600981446656"), mod)
 
 
 @client.command(pass_context = True)
 @commands.has_role("Owner")
-async def nomod(ctx, channel = None):
+async def nomod(ctx, channel: discord.Channel = None):
     async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
             if msg.author == client.user:
                 mod = eval(msg.content)
     if not channel: channel = ctx.message.channel
-    if channel == "all":
-        for x in mod:
-            mod[x] = False
-        await client.say("Done")
-    elif not isinstance(channel, discord.Channel):
-        await client.say("That's not a channel!")
-    else:
-        mod[channel.id] = False
-        await client.say("Done")
-        await client.send_message(client.get_channel("538382600981446656"), mod)
+    mod[channel.id] = False
+    await client.say("Done")
+    await client.send_message(client.get_channel("538382600981446656"), mod)
     
     
         
