@@ -25,7 +25,7 @@ async def on_ready():
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def esay(ctx, *, mg = None):
-      if message.channel.type != discord.ChannelType.private:
+      if ctx.message.channel.type != discord.ChannelType.private:
           await client.delete_message(ctx.message)
 
           if not mg: await client.say("Please specify a message to send")
@@ -55,7 +55,7 @@ async def dislikes():
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def say(ctx, *, mg = None):
-      if message.channel.type != discord.ChannelType.private:
+      if ctx.message.channel.type != discord.ChannelType.private:
           await client.delete_message(ctx.message)
 
           if not mg: await client.say("Please specify a message to send")
@@ -64,7 +64,7 @@ async def say(ctx, *, mg = None):
 @client.command(pass_context=True)
 @commands.has_role('Owner')
 async def joined_at(ctx, member: discord.Member = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         if member is None:
             member = ctx.message.author
 
@@ -73,7 +73,7 @@ async def joined_at(ctx, member: discord.Member = None):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def ban(ctx, user: discord.Member = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         if user == None: await client.say("Tell me who to ban")
         else: 
             await client.ban(user, 7)
@@ -82,7 +82,7 @@ async def ban(ctx, user: discord.Member = None):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def unban(ctx, user = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         if user == None: await client.say("Tell me who to unban")
         else: 
             try:
@@ -96,7 +96,7 @@ async def unban(ctx, user = None):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def kick(ctx, user: discord.Member = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         if user == None: await client.say("Tell me who to kick")
         else: 
             await client.kick(user)
@@ -106,7 +106,7 @@ async def kick(ctx, user: discord.Member = None):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def clear(ctx, *, number = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         if not number or not number.isdigit(): await client.send_message(ctx.message.channel, "Tell me how many messages to delete")
         else:
             try:
@@ -146,7 +146,7 @@ lp = True
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def color(ctx):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         global lp
         lp = True
         role = get(ctx.message.server.roles, id="517751310989131796")
@@ -212,7 +212,7 @@ async def sub():
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def stopcolor(ctx):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         global lp
         lp = False
         await client.send_message(ctx.message.channel, "**Stoped rainbow colored roles!**")
@@ -220,7 +220,7 @@ async def stopcolor(ctx):
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def word(ctx, *, word=None):
-      if message.channel.type != discord.ChannelType.private:
+      if ctx.message.channel.type != discord.ChannelType.private:
           global loop
           await client.send_message(ctx.message.channel, "Saying "+word+" 100,000 times")
           await client.delete_message(ctx.message)
@@ -285,7 +285,7 @@ q = False
 isitdone = False
 @client.event
 async def on_channel_create(channel):
-    if message.channel.type != discord.ChannelType.private:
+    if channel.type != discord.ChannelType.private:
         async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
             if msg.author == client.user:
                 mod = eval(msg.content)
@@ -317,7 +317,7 @@ async def on_channel_create(channel):
     
 @client.event
 async def on_channel_delete(channel):
-    if message.channel.type != discord.ChannelType.private:
+    if channel.type != discord.ChannelType.private:
         if message.channel.type != discord.ChannelType.private:
             async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
                 if msg.author == client.user:
@@ -329,7 +329,7 @@ async def on_channel_delete(channel):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def mod(ctx, channel: discord.Channel = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
                 if msg.author == client.user:
                     mod = eval(msg.content)
@@ -342,7 +342,7 @@ async def mod(ctx, channel: discord.Channel = None):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def nomod(ctx, channel: discord.Channel = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
                 if msg.author == client.user:
                     mod = eval(msg.content)
@@ -356,7 +356,7 @@ async def nomod(ctx, channel: discord.Channel = None):
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def ismod(ctx, channel: discord.Channel = None):
-    if message.channel.type != discord.ChannelType.private:
+    if ctx.message.channel.type != discord.ChannelType.private:
         async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
                 if msg.author == client.user:
                     mod = eval(msg.content)
