@@ -299,7 +299,7 @@ async def on_channel_delete(channel):
     
 @client.command(pass_context = True)
 @commands.has_role("Owner")
-async def mod(ctx, channel = None)
+async def mod(ctx, channel = None):
 async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
         if msg.author == client.user:
             mod = eval(msg.content)
@@ -319,7 +319,7 @@ else:
 
 @client.command(pass_context = True)
 @commands.has_role("Owner")
-async def nomod(ctx, channel = None)
+async def nomod(ctx, channel = None):
 async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
         if msg.author == client.user:
             mod = eval(msg.content)
