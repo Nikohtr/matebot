@@ -275,33 +275,34 @@ q = False
 isitdone = False
 @client.event
 async def on_channel_create(channel):
-    async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
-        if msg.author == client.user:
-            mod = eval(msg.content)
-    global q
-    global isitdone
-    q = True
-    await client.send_message(channel, "Should I mod this?")
-    ans = await client.wait_for_message(author = await client.get_user_info("263685060819943425"))
-    ans = ans.content
-    ans = ans.lower()
-    print(ans)
-    if ans == "y" or ans == "yes":
-        mod[channel.id] = True
-        await client.send_message(client.get_channel("538382600981446656"), mod)
-        await client.send_message(channel, "Ok I am gonna mod")
-        while not isitdone:
-            q=True
-        q = False
-    elif ans == "n" or ans == 'no':
-        mod[channel.id] = False
-        await client.send_message(client.get_channel("538382600981446656"), mod)
-        await client.send_message(channel, "Ok I am not gonna mod")
-        while not isitdone:
-            q=True
-        q = False
-    else:
-        await on_channel_create(channel)
+    if message.channel.type != discord.ChannelType.private:
+        async for msg in client.logs_from(client.get_channel("538382600981446656"), limit=1):
+            if msg.author == client.user:
+                mod = eval(msg.content)
+        global q
+        global isitdone
+        q = True
+        await client.send_message(channel, "Should I mod this?")
+        ans = await client.wait_for_message(author = await client.get_user_info("263685060819943425"))
+        ans = ans.content
+        ans = ans.lower()
+        print(ans)
+        if ans == "y" or ans == "yes":
+            mod[channel.id] = True
+            await client.send_message(client.get_channel("538382600981446656"), mod)
+            await client.send_message(channel, "Ok I am gonna mod")
+            while not isitdone:
+                q=True
+            q = False
+        elif ans == "n" or ans == 'no':
+            mod[channel.id] = False
+            await client.send_message(client.get_channel("538382600981446656"), mod)
+            await client.send_message(channel, "Ok I am not gonna mod")
+            while not isitdone:
+                q=True
+            q = False
+        else:
+            await on_channel_create(channel)
     
     
 @client.event
