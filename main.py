@@ -346,9 +346,9 @@ async def ismod(ctx, channel: discord.Channel = None):
                 mod = eval(msg.content)
     if not channel: channel = ctx.message.channel
     if mod[channel.id]:
-        client.say("Yes I moderate this channel")
+        await client.say("Yes I moderate this channel")
     else:
-        client.say("No I don't moderate this channel")
+        await client.say("No I don't moderate this channel")
     
     
         
