@@ -283,9 +283,10 @@ async def on_channel_create(channel):
     ans = await client.wait_for_message(author = await client.get_user_info("263685060819943425"))
     ans = ans.content
     ans = ans.lower()
-    if ans == "y" or "yes":
+    print(ans)
+    if ans == "y" or ans == "yes":
         mod[channel.id] = True
-    elif ans == "n" or 'no':
+    elif ans == "n" or ans == 'no':
         mod[channel.id] = False
     else:
         await on_channel_create(channel)
