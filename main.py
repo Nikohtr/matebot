@@ -278,6 +278,7 @@ async def on_channel_create(channel):
         if msg.author == client.user:
             mod = eval(msg.content)
     mod[channel.id] = False
+    await client.send_message(client.get_channel("538382600981446656"), mod)
     await client.send_message(channel, "Should I mod this?")
     ans = await client.wait_for_message(author = await client.get_user_info("263685060819943425"))
     ans = ans.content
