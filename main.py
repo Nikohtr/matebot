@@ -389,7 +389,7 @@ async def on_message(message):
     global isitdone
     isitdone = False
     if message.author != client.user:  
-      if (message.content.startswith("+") or message.content.startswith("?")) and "owner" in [y.name.lower() for y in author.roles]:
+      if (message.content.startswith("+") or message.content.startswith("?")) and "owner" in [y.name.lower() for y in message.author.roles]:
         pass
       elif message.content=="+gap" or message.content=="+dislikes":
         pass
