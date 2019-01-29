@@ -223,7 +223,7 @@ async def stopcolor(ctx):
         
 @client.command(pass_context = True)
 async def keepalive(ctx):
-    if ctx.message.channel.type != discord.ChannelType.private and ctx.message.author.bot:
+    if ctx.message.channel.type != discord.ChannelType.private:
         client.say("I ain't sleeping boi!")
         
 
