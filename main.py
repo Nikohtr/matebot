@@ -388,16 +388,17 @@ async def on_message(message):
     global q
     global isitdone
     isitdone = False
-    if message.author != client.user:  
-      if (message.content.startswith("+") or message.content.startswith("?")) and "owner" in [y.name.lower() for y in message.author.roles]:
+    if message.author != client.user:
+      if message.channel.type == discord.ChannelType.private:
+        await client.send_message(message.channel, "Nah I don't like speaking in DMs")  
+      elif (message.content.startswith("+") or message.content.startswith("?")) and "owner" in [y.name.lower() for y in message.author.roles]:
         pass
       elif message.content=="+gap" or message.content=="+dislikes":
         pass
       elif await isEnglish(message.content):
         await client.delete_message(message)
         await client.send_message(message.channel, "That's not very nice you know. I only understand English")
-      elif message.channel.type == discord.ChannelType.private:
-        await client.send_message(message.channel, "Nah I don't like speaking in DMs")
+      
       elif not await should_mod(message.channel.id):
         pass
       elif q:
