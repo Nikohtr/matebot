@@ -220,6 +220,14 @@ async def stopcolor(ctx):
         global lp
         lp = False
         await client.send_message(ctx.message.channel, "**Stoped rainbow colored roles!**")
+        
+@client.command(pass_context = True)
+@commands.has_role('Owner')
+async def keepalive(ctx):
+    if ctx.message.channel.type != discord.ChannelType.private and ctx.message.author.bot:
+        client.say("I ain't sleeping boi!")
+        
+
       
 @client.command(pass_context = True)
 @commands.has_role('Owner')
