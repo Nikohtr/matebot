@@ -102,7 +102,7 @@ async def kick(ctx, user: discord.Member = None):
             await client.kick(user)
             await client.say("**Kicked {0}**".format(user))
 
-        
+deletemsg = True        
 @client.command(pass_context = True)
 @commands.has_role("Owner")
 async def clear(ctx, *, number = None):
@@ -110,6 +110,8 @@ async def clear(ctx, *, number = None):
         if not number or not number.isdigit(): await client.send_message(ctx.message.channel, "Tell me how many messages to delete")
         else:
             try:
+                global deletemsg
+                deletemsg = False
                 mgs = []
                 number = int(number)+1
                 if number>100:
@@ -128,6 +130,7 @@ async def clear(ctx, *, number = None):
                     await client.delete_messages(mgs)
                 mgs.clear
                 await client.send_message(client.get_channel("517753229258391567"), embed = discord.Embed(description ="Bulk delete by **"+str(ctx.message.author)+"** in **"+str(ctx.message.channel)+"**. **"+str(number)+"** messages were deleted", color = 0x2b44ff))
+                deletemsg = True
             except discord.errors.HTTPException:
                 await client.say("There was an error! Messages are most likely older than 14 days")
                 
@@ -268,7 +271,8 @@ async def on_member_join(member):
     
 @client.event
 async def on_message_delete(message):
-    if message.author!=client.user:
+    global deletemsg
+    if message.author!=client.user and not deletemsg:
         await client.send_message(client.get_channel("517753229258391567"), embed = discord.Embed(description ="Message sent by **"+str(message.author)+"** was deleted in **"+str(message.channel)+"**\n\n**"+message.content+"**", color = 0x2b44ff))
     
 
