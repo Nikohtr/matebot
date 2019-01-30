@@ -19,7 +19,7 @@ async def on_ready():
     print("I'm in")
     print(client.user)
     client.loop.create_task(change_playing())
-    await sub()
+    client.loop.create_task(sub())
     
        
 @client.command(pass_context = True)
