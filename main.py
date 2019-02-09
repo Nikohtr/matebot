@@ -260,7 +260,7 @@ async def on_member_remove(member):
     
 @client.event
 async def on_member_join(member):
-    if not ctx.message.author.bot:
+    if not member.bot:
         await client.send_message(client.get_channel("517753134357938176"),"{0.mention} I slid in them DMs go there to get access!".format(member))
         await client.send_message(await client.get_user_info(member), "Hey what's your name?")
         name = await client.wait_for_message(author = member)
