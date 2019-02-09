@@ -261,14 +261,12 @@ async def on_member_remove(member):
 @client.event
 async def on_member_join(member):
     if not member.bot:
-        await client.send_message(client.get_channel("517753134357938176"),"{0.mention} I slid in them DMs go there to get access!".format(member))
-        await client.send_message(await client.get_user_info(member), "Hey what's your name?")
+        await client.send_message(client.get_channel("517753134357938176"), "Hey {0.mention} what's your name?".format(member))
         name = await client.wait_for_message(author = member)
-        name = name.content
-        await client.send_message(await client.get_user_info(member), "Thanks MATE "+name)
-        role1 = get(message.server.roles, id='517751378802638904')
-        await client.add_roles(message.author, role1)
-        await client.change_nickname(message.author, "MATE "+name )
+        await client.send_message(client.get_channel("517753134357938176"), "Thanks MATE "+name.content)
+        role1 = get(name.server.roles, id='517751378802638904')
+        await client.add_roles(member, role1)
+        await client.change_nickname(member, "MATE "+name )
     
 @client.event
 async def on_message_delete(message):
