@@ -75,9 +75,12 @@ async def joined_at(ctx, member: discord.Member = None):
 async def ban(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if user == None: await client.say("Tell me who to ban")
-        else: 
-            await client.ban(user, 7)
-            await client.say("**Banned {0}**".format(user))
+        else:
+            try:
+                await client.ban(user, 7)
+                await client.say("**Banned {0}**".format(user))
+            except discord.errors.NotFound:
+                await client.say("I can't find that guy")
 
 @client.command(pass_context = True)
 @commands.has_role("Owner")
@@ -98,9 +101,12 @@ async def unban(ctx, user = None):
 async def kick(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if user == None: await client.say("Tell me who to kick")
-        else: 
-            await client.kick(user)
-            await client.say("**Kicked {0}**".format(user))
+        else:
+            try:
+                await client.kick(user)
+                await client.say("**Kicked {0}**".format(user))
+            except discord.errors.NotFound:
+                await client.say("I can't find that guy")
 
 deletemsg = True        
 @client.command(pass_context = True)
