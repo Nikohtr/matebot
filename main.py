@@ -39,7 +39,8 @@ async def register(user):
     else:
         for x in values_list:
             if x == None:
-                karma.update_acell(x.row, x.col, "0")
+                karma.update_acell(x.row, x.col, user.id)
+                karma.update_acell(x.row, x.col+1, "0")
                 break
 
 @client.event                
