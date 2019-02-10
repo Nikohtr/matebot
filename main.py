@@ -79,6 +79,7 @@ async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
         user = str(user.id)
+        await register(user)
         cell = karma.find(user)
         client.say(str(cell.value))
     
