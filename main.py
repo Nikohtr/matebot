@@ -31,13 +31,14 @@ async def on_ready():
     client.loop.create_task(sub())
     
 def register(user):
-    values_list = worksheet.row_values(1)
+    values_list = karma.row_values(1)
     if user in values_list:
         pass
     else:
         for x in values_list:
             if x == None:
                 karma.update_acell(x.row, x.col, "0")
+                break
                 
 async def update(user, num):
     cell = karma.find(user)
