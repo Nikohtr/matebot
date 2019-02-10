@@ -14,7 +14,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 loop = True
-scopes = ['https://spreadsheets.google.com/feeds']
+scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 json_creds = os.getenv("KARMA")
 creds_dict = json.loads(json_creds)
 creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
