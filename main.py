@@ -30,7 +30,7 @@ async def on_ready():
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
     
-async def register(user):
+def register(user):
     values_list = worksheet.row_values(1)
     if user in values_list:
         pass
@@ -50,7 +50,7 @@ async def update(user, num):
 async def addscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = str(user.id)
-        await register(user)
+        register(user)
         await update(user, num)
         client.say("Done!")
         
@@ -61,7 +61,7 @@ async def addscore(ctx, user: discord.Member, num: int):
 async def subtractscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = str(user.id)
-        await register(user)
+        register(user)
         num = num-(2*num)
         await update(user, num)
         client.say("Done!")
@@ -82,7 +82,7 @@ async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
         user = str(user.id)
-        await register(user)
+        register(user)
         cell = karma.find(user)
         client.say(str(cell.value))
     
