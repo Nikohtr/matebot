@@ -20,7 +20,7 @@ creds_dict = json.loads(json_creds)
 creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
 gs = gspread.authorize(creds)
-karma = gc.open("karma").sheet1
+karma = gs.open("karma").sheet1
 
 client = commands.Bot(command_prefix='+')        
 @client.event
