@@ -31,7 +31,7 @@ async def on_ready():
     client.loop.create_task(sub())
  
 @client.command()
-async def register(user: disocrd.Member):
+async def register(user: discord.Member):
     user = str(user.id)
     values_list = karma.row_values(1)
     if user in values_list:
