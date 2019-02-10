@@ -32,6 +32,7 @@ async def on_ready():
  
 @client.command()
 async def register(user):
+    user = str(user.id)
     values_list = karma.row_values(1)
     if user in values_list:
         pass
