@@ -398,10 +398,11 @@ async def on_message(message):
     global q
     global isitdone
     isitdone = False
+    urole = [y.name.lower() for y in message.author.roles]
     if message.author != client.user:
       if message.channel.type == discord.ChannelType.private:
         await client.send_message(message.channel, "Nah I don't like speaking in DMs")  
-      elif (message.content.startswith("+") or message.content.startswith("?")) and "owner" in [y.name.lower() for y in message.author.roles]:
+      elif message.content.startswith("+") and "owner" in urole:
         pass
       elif message.content=="+gap" or message.content=="+dislikes":
         pass
@@ -418,8 +419,8 @@ async def on_message(message):
           if message.channel.id != '517780380049473563':
             mesg = "Thank you mate, very cool!!!"
             await client.send_message(message.channel, mesg)
-          elif "mate" in [y.name.lower() for y in author.roles]:
-            await client.send_message(message.channel, "You are cool mate don't worrry")
+          elif "mate" in urole:
+            await client.send_message(message.channel, "You are cool mate don't worry")
           
           else:
               num = random.randint(1,3)
@@ -453,7 +454,7 @@ async def on_message(message):
                     losers = mesg.content
                     losers = losers+","+message.author.id
                     await client.send_message(client.get_channel("530336392455258142"), losers)
-          elif message.author.id == "263685060819943425":
+          elif "mate" in urole:
             await client.send_message(message.channel, "You are cool mate don't worry")
           else:
             await client.send_message(message.channel, "YOU ARE A DISAPPOINTMENT FOR EVERYONE!!!")
