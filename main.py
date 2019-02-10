@@ -29,8 +29,9 @@ async def on_ready():
     print(client.user),
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
-    
-def register(user):
+ 
+@client.event
+async def register(user):
     values_list = karma.row_values(1)
     if user in values_list:
         pass
@@ -39,7 +40,8 @@ def register(user):
             if x == None:
                 karma.update_acell(x.row, x.col, "0")
                 break
-                
+
+@client.event                
 async def update(user, num):
     cell = karma.find(user)
     karma.update_acell(cell.row, (cell.col)+1, str(int(cell.value)+num))
@@ -51,7 +53,7 @@ async def update(user, num):
 async def addscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = str(user.id)
-        register(user)
+        await register(user)
         await update(user, num)
         client.say("Done!")
         
@@ -62,7 +64,7 @@ async def addscore(ctx, user: discord.Member, num: int):
 async def subtractscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = str(user.id)
-        register(user)
+        await register(user)
         num = num-(2*num)
         await update(user, num)
         client.say("Done!")
@@ -73,7 +75,7 @@ async def subtractscore(ctx, user: discord.Member, num: int):
 async def changescore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = str(user.id)
-        register(user)
+        await register(user)
         cell = karma.find(user)
         karma.update_acell(cell.row, (cell.col)+1, str(num))
         client.say("Done!")
@@ -84,7 +86,7 @@ async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
         user = str(user.id)
-        register(user)
+        await register(user)
         cell = karma.find(user)
         client.say(str(cell.value))
     
