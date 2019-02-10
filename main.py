@@ -45,17 +45,18 @@ async def update(user, num):
     
     
     
-@commands.command(pass_context=True, aliases=['as'])
+@client.command(pass_context=True, aliases=['as'])
 @commands.has_role('Owner')
 async def addscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = str(user.id)
         await register(user)
         await update(user, num)
+        client.say("Done!")
         
 
 
-@commands.command(pass_context=True, aliases=['ss'])
+@client.command(pass_context=True, aliases=['ss'])
 @commands.has_role('Owner')
 async def subtractscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
@@ -63,17 +64,19 @@ async def subtractscore(ctx, user: discord.Member, num: int):
         await register(user)
         num = num-(2*num)
         await update(user, num)
+        client.say("Done!")
 
     
-@commands.command(pass_context=True, aliases=['cs'])
+@client.command(pass_context=True, aliases=['cs'])
 @commands.has_role('Owner')
 async def changescore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = str(user.id)
         cell = karma.find(user)
         karma.update_acell(cell.row, (cell.col)+1, str(num))
+        client.say("Done!")
     
-@commands.command(pass_context=True)
+@client.command(pass_context=True)
 @commands.has_role('Owner')
 async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
@@ -83,7 +86,7 @@ async def score(ctx, user: discord.Member = None):
         cell = karma.find(user)
         client.say(str(cell.value))
     
-# @commands.command(pass_context=True)
+# @client.command(pass_context=True)
 # @commands.has_role('Owner')
 # async def rep(ctx, user: discord.Member):
 #     if ctx.message.channel.type != discord.ChannelType.private:
