@@ -246,10 +246,8 @@ async def is_time_between(begin_time, end_time, check_time=None):
     else:
         return check_time >= begin_time or check_time <= end_time
         
-notdone = True
 @client.event
 async def sub():
-    global notdone
     while True:
         key = os.getenv("KEY")
         data1 = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key="+key).read()
@@ -260,31 +258,6 @@ async def sub():
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
                 if message.author == client.user:
                     subsbefore = int(message.content)
-        if await is_time_between(time(19,0,0), time(19,0,2)) and notdone:
-            data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
-            subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-            async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
-                if message.author == client.user:
-                    su = message.content
-            await client.send_message(client.get_channel("529692628518830091"), subspew)
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
-            async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
-                if message.author == client.user:
-                    loser = message.content
-                    loser = loser.split(",")
-                    print(loser)
-            for item in loser:
-                try:
-                    print(item)
-                    await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
-                except discord.Forbidden:
-                    print(item+" blocked me")
-                    await client.send_message(client.get_channel("517780380049473563") , "<@"+item+"> You think blocking me can save you. Pathetic. Just a friendly reminder that no one likes you and you are a disappointment for your parents")
-            notdone = False
-        elif await is_time_between(time(19,0,3), time(19,0,5)):
-            notdone = True
-        elif await is_time_between(time(15,0,0), time(15,0,1)):
-            await client.send_message(await client.get_user_info('418380611233775626') , "Hey Berk I am just here to remind you that you are worth nothing and no one likes you becuase you are a noob. No one has ever liked you and no one will. You will die alone in some miserable house!")
         elif subsnow>subsbefore:
             print(subspew)
             await client.send_message(client.get_channel("532571319196188712"), subsnow)
@@ -294,6 +267,28 @@ async def sub():
         await asyncio.sleep(1)
         
         
+@client.command(pass_context= True)
+async def pewdie9(ctx):
+    if ctx.message.author.bot:
+        data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
+        subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+        async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
+            if message.author == client.user:
+                su = message.content
+        await client.send_message(client.get_channel("529692628518830091"), subspew)
+        await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie got {:,d} subscribers today".format(int(subspew)-int(su)))
+        async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
+            if message.author == client.user:
+                loser = message.content
+                loser = loser.split(",")
+                print(loser)
+        for item in loser:
+            try:
+                print(item)
+                await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
+            except discord.Forbidden:
+                print(item+" blocked me")
+                await client.send_message(client.get_channel("517780380049473563") , "<@"+item+"> You think blocking me can save you. Pathetic. Just a friendly reminder that no one likes you and you are a disappointment for your parents")
 
 @client.command(pass_context = True)
 @commands.has_role('Owner')
