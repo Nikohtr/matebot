@@ -93,6 +93,7 @@ async def score(ctx, user: discord.Member = None):
         all = sheet.get_all_records()
         for x in all:
             if x["id"] == user:
+                print(x['points'])
                 await client.say("Your score is "+ str(x['points']))
                 
     
