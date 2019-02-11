@@ -14,13 +14,13 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 loop = True
-# scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-# json_creds = os.getenv("KARMA")
-# creds_dict = json.loads(json_creds)
-# creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
-# creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
-# gs = gspread.authorize(creds)
-# karma = gs.open("karma").sheet1
+scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+json_creds = os.getenv("KARMA")
+creds_dict = json.loads(json_creds)
+creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
+gs = gspread.authorize(creds)
+sheet = gs.open("karma").sheet1
 
 client = commands.Bot(command_prefix='+')        
 @client.event
@@ -30,64 +30,71 @@ async def on_ready():
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
  
-# @client.command()
-# async def register(user: discord.Member):
-#     user = str(user.id)
-#     values_list = karma.row_values(1)
-#     if user in values_list:
-#         pass
-#     else:
-#         print("not there")
-#         karam.values_append("Sheet1!A:A", {"valueInputOption": "RAW"}, )
+async def register(user):
+    try:
+        cell = sheet.find(user)
+    except gspread.exceptions.CellNotFound:
+        all = sheet.get_all_records()
+        reg = [user, 0]
+        sheet.insert_row(reg, len(all)+1)
+        
 
-# @client.event                
-# async def update(user, num):
-#     cell = karma.find(user)
-#     karma.update_acell(cell.row, (cell.col)+1, str(int(cell.value)+num))
+@client.event                
+async def update(user, num):
+    all = sheet.get_all_records()
+    for x in all:
+        if x["id"] == user:
+            sheet.update_acell("B"+str(x.row), x["points"]+num)
+            break
     
     
     
-# @client.command(pass_context=True, aliases=['as'])
-# @commands.has_role('Owner')
-# async def addscore(ctx, user: discord.Member, num: int):
-#     if ctx.message.channel.type != discord.ChannelType.private:
-#         user = str(user.id)
-#         await register(user)
-#         await update(user, num)
-#         client.say("Done!")
+@client.command(pass_context=True, aliases=['as'])
+@commands.has_role('Owner')
+async def addscore(ctx, user: discord.Member, num: int):
+    if ctx.message.channel.type != discord.ChannelType.private:
+        user = user.id
+        await register(user)
+        await update(user, num)
+        client.say("Done!")
         
 
 
-# @client.command(pass_context=True, aliases=['ss'])
-# @commands.has_role('Owner')
-# async def subtractscore(ctx, user: discord.Member, num: int):
-#     if ctx.message.channel.type != discord.ChannelType.private:
-#         user = str(user.id)
-#         await register(user)
-#         num = num-(2*num)
-#         await update(user, num)
-#         client.say("Done!")
+@client.command(pass_context=True, aliases=['ss'])
+@commands.has_role('Owner')
+async def subtractscore(ctx, user: discord.Member, num: int):
+    if ctx.message.channel.type != discord.ChannelType.private:
+        user = user.id
+        await register(user)
+        num = num-(2*num)
+        await update(user, num)
+        client.say("Done!")
 
     
-# @client.command(pass_context=True, aliases=['cs'])
-# @commands.has_role('Owner')
-# async def changescore(ctx, user: discord.Member, num: int):
-#     if ctx.message.channel.type != discord.ChannelType.private:
-#         user = str(user.id)
-#         await register(user)
-#         cell = karma.find(user)
-#         karma.update_acell(cell.row, (cell.col)+1, str(num))
-#         client.say("Done!")
+@client.command(pass_context=True, aliases=['cs'])
+@commands.has_role('Owner')
+async def changescore(ctx, user: discord.Member, num: int):
+    if ctx.message.channel.type != discord.ChannelType.private:
+        user = user.id
+        await register(user)
+        all = sheet.get_all_records()
+        for x in all:
+            if x["id"] == user:
+                sheet.update_acell("B"+str(x.row), num)
+        client.say("Done!")
     
-# @client.command(pass_context=True)
-# @commands.has_role('Owner')
-# async def score(ctx, user: discord.Member = None):
-#     if ctx.message.channel.type != discord.ChannelType.private:
-#         if not user: user = ctx.message.author
-#         user = str(user.id)
-#         await register(user)
-#         cell = karma.find(user)
-#         client.say(str(cell.value))
+@client.command(pass_context=True)
+@commands.has_role('Owner')
+async def score(ctx, user: discord.Member = None):
+    if ctx.message.channel.type != discord.ChannelType.private:
+        if not user: user = ctx.message.author
+        user = user.id
+        await register(user)
+        all = sheet.get_all_records()
+        for x in all:
+            if x["id"] == user:
+                await client.say("Your score is "+ str(x['points']))
+                
     
 # @client.command(pass_context=True)
 # @commands.has_role('Owner')
