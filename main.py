@@ -94,7 +94,7 @@ async def score(ctx, user: discord.Member = None):
         print(all)
         for x in all:
             print(x["id"] == user)
-            if x["id"] == user:
+            if str(x["id"]) == str(user):
                 print(x['points'])
                 await client.say("Your score is "+ str(x['points']))
                 break
