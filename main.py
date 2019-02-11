@@ -36,7 +36,7 @@ async def register(user):
     except gspread.exceptions.CellNotFound:
         all = sheet.get_all_records()
         reg = [user, 0]
-        sheet.insert_row(reg, len(all)+1)
+        sheet.insert_row(reg, 2)
         
 
 @client.event                
