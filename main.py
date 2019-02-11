@@ -68,7 +68,7 @@ async def subtractscore(ctx, user: discord.Member, num: int):
         await register(user)
         num = num-(2*num)
         await update(user, num)
-        client.say("Done!")
+        await client.say("Done!")
 
     
 @client.command(pass_context=True, aliases=['cs'])
@@ -81,7 +81,7 @@ async def changescore(ctx, user: discord.Member, num: int):
         for x in all:
             if x["id"] == user:
                 sheet.update_acell("B"+str(x.row), num)
-        client.say("Done!")
+        await client.say("Done!")
     
 @client.command(pass_context=True)
 @commands.has_role('Owner')
