@@ -270,6 +270,7 @@ async def sub():
 @client.command(pass_context= True)
 async def pewdie9(ctx):
     if ctx.message.author.bot:
+        key = os.getenv("KEY")
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
         async for message in client.logs_from(client.get_channel("529692628518830091"), limit=1):
