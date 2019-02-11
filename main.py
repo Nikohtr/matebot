@@ -42,9 +42,10 @@ async def register(user):
 @client.event                
 async def update(user, num):
     all = sheet.get_all_records()
+    cell = sheet.find(user)
     for x in all:
         if str(x["id"]) == str(user):
-            sheet.update_acell("B"+str(x.row), x["points"]+num)
+            sheet.update_acell("B"+str(cell.row), x["points"]+num)
             break
     
     
