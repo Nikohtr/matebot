@@ -78,9 +78,10 @@ async def changescore(ctx, user: discord.Member, num: int):
         user = user.id
         await register(user)
         all = sheet.get_all_records()
+        cell = sheet.find(user)
         for x in all:
             if str(x["id"]) == str(user):
-                sheet.update_acell("B"+str(x.row), num)
+                sheet.update_acell("B"+str(cell.row), num)
         await client.say("Done!")
     
 @client.command(pass_context=True)
