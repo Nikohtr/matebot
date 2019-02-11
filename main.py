@@ -43,7 +43,7 @@ async def register(user):
 async def update(user, num):
     all = sheet.get_all_records()
     for x in all:
-        if x["id"] == user:
+        if str(x["id"]) == str(user):
             sheet.update_acell("B"+str(x.row), x["points"]+num)
             break
     
@@ -79,7 +79,7 @@ async def changescore(ctx, user: discord.Member, num: int):
         await register(user)
         all = sheet.get_all_records()
         for x in all:
-            if x["id"] == user:
+            if str(x["id"]) == str(user):
                 sheet.update_acell("B"+str(x.row), num)
         await client.say("Done!")
     
@@ -91,11 +91,8 @@ async def score(ctx, user: discord.Member = None):
         user = user.id
         await register(user)
         all = sheet.get_all_records()
-        print(all)
         for x in all:
-            print(x["id"] == user)
             if str(x["id"]) == str(user):
-                print(x['points'])
                 await client.say("Your score is "+ str(x['points']))
                 break
                 
