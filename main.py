@@ -87,7 +87,7 @@ async def score(ctx, user: discord.Member = None):
         await register(user.id)
         cell = sheet.find(user.id)
         points = sheet.acell("B"+str(cell.row))
-        await client.say("{0.mention} has a score of "+ str(points.value).format(user))
+        await client.say("{0.mention} has a score of ".format(user)+ str(points.value))
                 
     
 # @client.command(pass_context=True)
