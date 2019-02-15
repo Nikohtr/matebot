@@ -85,7 +85,7 @@ async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
         await register(user.id)
-        cell = sheet.find(user)
+        cell = sheet.find(user.id)
         points = sheet.acell("B"+cell.row)
         await client.say("{0.mention} has a score of "+ str(points.value).format(user))
                 
