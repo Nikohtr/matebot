@@ -34,19 +34,16 @@ async def register(user):
     try:
         cell = sheet.find(user)
     except gspread.exceptions.CellNotFound:
-        all = sheet.get_all_records()
         reg = [user, 0]
         sheet.insert_row(reg, 2)
         
 
 @client.event                
 async def update(user, num):
-    all = sheet.get_all_records()
     cell = sheet.find(user)
-    for x in all:
-        if str(x["id"]) == str(user):
-            sheet.update_acell("B"+str(cell.row), x["points"]+num)
-            break
+    points = sheet.acell("B"+cell.row)
+    sheet.update_acell("B"+str(cell.row), int(points.value)+num)
+            
     
     
     
@@ -78,11 +75,8 @@ async def changescore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         user = user.id
         await register(user)
-        all = sheet.get_all_records()
         cell = sheet.find(user)
-        for x in all:
-            if str(x["id"]) == str(user):
-                sheet.update_acell("B"+str(cell.row), num)
+        sheet.update_acell("B"+str(cell.row), num)
         await client.say("Done!")
     
 @client.command(pass_context=True)
@@ -90,13 +84,10 @@ async def changescore(ctx, user: discord.Member, num: int):
 async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
-        user = user.id
-        await register(user)
-        all = sheet.get_all_records()
-        for x in all:
-            if str(x["id"]) == str(user):
-                await client.say("Your score is "+ str(x['points']))
-                break
+        await register(user.id)
+        cell = sheet.find(user)
+        points = sheet.acell("B"+cell.row)
+        await client.say("{0.mention} has a score of "+ str(points.value).format(user))
                 
     
 # @client.command(pass_context=True)
