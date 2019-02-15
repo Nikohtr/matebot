@@ -54,7 +54,7 @@ async def addscore(ctx, user: discord.Member, num: int):
         user = user.id
         await register(user)
         await update(user, num)
-        client.say("Done!")
+        await client.say("Done!")
         
 
 
