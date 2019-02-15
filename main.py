@@ -41,7 +41,7 @@ async def register(user):
 @client.event                
 async def update(user, num):
     cell = sheet.find(user)
-    points = sheet.acell("B"+cell.row)
+    points = sheet.acell("B"+str(cell.row))
     sheet.update_acell("B"+str(cell.row), int(points.value)+num)
             
     
@@ -86,7 +86,7 @@ async def score(ctx, user: discord.Member = None):
         if not user: user = ctx.message.author
         await register(user.id)
         cell = sheet.find(user.id)
-        points = sheet.acell("B"+cell.row)
+        points = sheet.acell("B"+str(cell.row))
         await client.say("{0.mention} has a score of "+ str(points.value).format(user))
                 
     
