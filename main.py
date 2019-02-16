@@ -14,14 +14,13 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 loop = True
-async def access():
-    scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    json_creds = os.getenv("KARMA")
-    creds_dict = json.loads(json_creds)
-    creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
-    gs = gspread.authorize(creds)
-    sheet = gs.open("karma").sheet1
+scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+json_creds = os.getenv("KARMA")
+creds_dict = json.loads(json_creds)
+creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
+gs = gspread.authorize(creds)
+sheet = gs.open("karma").sheet1
 
 client = commands.Bot(command_prefix='+')        
 @client.event
@@ -30,14 +29,20 @@ async def on_ready():
     print(client.user),
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
-    await access()
  
 async def register(user):
+    global sheet
     try:
         try:
             cell = sheet.find(user)
         except gspread.exceptions.APIError:
-            await access()
+            scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+            json_creds = os.getenv("KARMA")
+            creds_dict = json.loads(json_creds)
+            creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
+            gs = gspread.authorize(creds)
+            sheet = gs.open("karma").sheet1
             cell = sheet.find(user)
     except gspread.exceptions.CellNotFound:
         reg = [user, 0]
