@@ -106,7 +106,14 @@ async def score(ctx, user: discord.Member = None):
 # async def rep(ctx, user: discord.Member):
 #     if ctx.message.channel.type != discord.ChannelType.private:
 
-       
+@client.command(pass_context = True)
+@commands.has_role('Owner')
+async def test(ctx):
+    hook = await client.webhook_create(ctx.message.channel, "MATEHook", 1)
+    hook.send("Hello World")
+
+
+
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def esay(ctx, *, mg = None):
