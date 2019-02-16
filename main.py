@@ -12,6 +12,8 @@ from datetime import datetime, time
 import ast
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import requests
+from discord import Webhook, RequestsWebhookAdapter
 
 loop = True
 scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
@@ -109,7 +111,7 @@ async def score(ctx, user: discord.Member = None):
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def test(ctx):
-    hook = webhook = discord.Webhook.partial(123456, 'abcdefg', adapter=discord.RequestsWebhookAdapter())
+    hook = webhook = Webhook.partial(123456, 'abcdefg', adapter=RequestsWebhookAdapter())
     hook.send("Hello World")
 
 
