@@ -13,6 +13,7 @@ import ast
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import requests
+from discord import Webhook, RequestsWebhookAdapter
 
 loop = True
 scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
@@ -107,6 +108,13 @@ async def score(ctx, user: discord.Member = None):
 # async def rep(ctx, user: discord.Member):
 #     if ctx.message.channel.type != discord.ChannelType.private:
 
+@client.command(pass_context = True)
+@commands.has_role('Owner')
+async def test(ctx):
+    hook_id = os.getenv("Webhook_id")
+    hook_token = os.getenv("Webhook_token")
+    hook = Webhook.partial(hook_id, hook_token, adapter=RequestsWebhookAdapter())
+    hook.send("Hello World!")
 
 
 @client.command(pass_context = True)
