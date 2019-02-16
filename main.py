@@ -107,13 +107,6 @@ async def score(ctx, user: discord.Member = None):
 # async def rep(ctx, user: discord.Member):
 #     if ctx.message.channel.type != discord.ChannelType.private:
 
-@client.command(pass_context = True)
-@commands.has_role('Owner')
-async def test(ctx):
-    hurl = os.getenv("hook_url")
-    hook = DiscordWebhook(url= hurl, content = "Hello World!")
-    hook.execute()
-
 
 @client.command(pass_context = True)
 @commands.has_role('Owner')
@@ -308,9 +301,10 @@ async def pewdie9(ctx):
                 print(item)
                 await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
             except discord.Forbidden:
-                print(item+" blocked me")
-                await client.send_message(client.get_channel("517780380049473563") , "<@"+item+"> You think blocking me can save you. Pathetic. Just a friendly reminder that no one likes you and you are a disappointment for your parents")
-
+                hurl = os.getenv("hook_url")
+                hook = DiscordWebhook(url= hurl, content = "<@"+item+"> You think blocking my man MATEBot can save you. Pathetic. Just a friendly reminder that no one likes you and you are a disappointment for your parents")
+                hook.execute()
+                
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def stopcolor(ctx):
