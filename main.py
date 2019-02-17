@@ -92,7 +92,6 @@ async def changescore(ctx, user: discord.Member, num: int):
         await client.say("Done!")
     
 @client.command(pass_context=True)
-@commands.has_role('Owner')
 async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
@@ -487,7 +486,7 @@ async def on_message(message):
         await client.send_message(message.channel, "Nah I don't like speaking in DMs")  
       elif message.content.startswith("+") and "owner" in urole:
         pass
-      elif message.content=="+gap" or message.content=="+dislikes":
+      elif message.content=="+gap" or message.content=="+dislikes" or message.content == "+score":
         pass
       elif await isEnglish(message.content):
         await client.delete_message(message)
