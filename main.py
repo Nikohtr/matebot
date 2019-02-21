@@ -68,7 +68,6 @@ async def addscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         global scorelog
         user = user.id
-        print(scorelog)
         if len(scorelog) == 0:
             scorelog = sheet.get_all_records()
         for items in scorelog:
@@ -88,7 +87,6 @@ async def subtractscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         global scorelog
         user = user.id
-        print(scorelog)
         if len(scorelog) == 0:
             scorelog = sheet.get_all_records()
         for items in scorelog:
@@ -108,7 +106,6 @@ async def changescore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         global scorelog
         user = user.id
-        print(scorelog)
         if len(scorelog) == 0:
             scorelog = sheet.get_all_records()
         for items in scorelog:
@@ -125,10 +122,17 @@ async def changescore(ctx, user: discord.Member, num: int):
 async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
-        await register(user.id)
-        cell = sheet.find(user.id)
-        points = sheet.acell("B"+str(cell.row))
-        await client.say("{0.mention} has a score of ".format(user)+ str(points.value))
+        global scorelog
+        if len(scorelog) == 0:
+            scorelog = sheet.get_all_records()
+        for items in scorelog:
+            if items["id"] == user.id:
+                await client.say("{0.mention} has a score of ".format(user)+ str(item[points]))
+                break
+            else:
+                await register(user.id)
+                await client.say("{0.mention} has a score of 0".format(user))
+                break
                 
     
 # @client.command(pass_context=True)
