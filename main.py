@@ -23,6 +23,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
 gs = gspread.authorize(creds)
 sheet = gs.open("karma").sheet1
 scorelog = sheet.get_all_records()
+print(scorelog)
 
 client = commands.Bot(command_prefix='+')        
 @client.event
@@ -67,6 +68,7 @@ async def addscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         global scorelog
         user = user.id
+        print(scorelog)
         if len(scorelog) == 0:
             scorelog = sheet.get_all_records()
         for items in scorelog:
@@ -86,6 +88,7 @@ async def subtractscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         global scorelog
         user = user.id
+        print(scorelog)
         if len(scorelog) == 0:
             scorelog = sheet.get_all_records()
         for items in scorelog:
@@ -105,6 +108,7 @@ async def changescore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
         global scorelog
         user = user.id
+        print(scorelog)
         if len(scorelog) == 0:
             scorelog = sheet.get_all_records()
         for items in scorelog:
