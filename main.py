@@ -22,8 +22,7 @@ creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
 gs = gspread.authorize(creds)
 sheet = gs.open("karma").sheet1
-scorelog = sheet.get_all_records()
-print(scorelog)
+
 
 client = commands.Bot(command_prefix='+')        
 @client.event
@@ -35,22 +34,21 @@ async def on_ready():
  
 async def register(user):
     global sheet
-    global scorelog
     try:
+        try:
+            cell = sheet.find(user)
+        except gspread.exceptions.APIError:
+            scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+            json_creds = os.getenv("KARMA")
+            creds_dict = json.loads(json_creds)
+            creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
+            gs = gspread.authorize(creds)
+            sheet = gs.open("karma").sheet1
+            cell = sheet.find(user)
+    except gspread.exceptions.CellNotFound:
         reg = [user, 0]
         sheet.insert_row(reg, 2)
-        scorelog.append(reg)
-    except gspread.exceptions.APIError:
-        scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-        json_creds = os.getenv("KARMA")
-        creds_dict = json.loads(json_creds)
-        creds_dict["private_key"] = creds_dict["private_key"].replace("\\\\n", "\n")
-        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scopes)
-        gs = gspread.authorize(creds)
-        sheet = gs.open("karma").sheet1
-        reg = [user, 0]
-        sheet.insert_row(reg, 2)
-        scorelog.append(reg)
         
 
 @client.event                
@@ -58,24 +56,14 @@ async def update(user, num):
     cell = sheet.find(user)
     points = sheet.acell("B"+str(cell.row))
     sheet.update_acell("B"+str(cell.row), int(points.value)+num)
-            
-    
     
     
 @client.command(pass_context=True, aliases=['as'])
 @commands.has_role('Owner')
 async def addscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
-        global scorelog
         user = user.id
-        if len(scorelog) == 0:
-            scorelog = sheet.get_all_records()
-        for items in scorelog:
-            if items["id"] == user:
-                break
-            else:
-                await register(user)
-                break
+        await register(user)
         await update(user, num)
         await client.say("Done!")
         
@@ -85,16 +73,8 @@ async def addscore(ctx, user: discord.Member, num: int):
 @commands.has_role('Owner')
 async def subtractscore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
-        global scorelog
         user = user.id
-        if len(scorelog) == 0:
-            scorelog = sheet.get_all_records()
-        for items in scorelog:
-            if items["id"] == user:
-                break
-            else:
-                await register(user)
-                break
+        await register(user)
         num = num-(2*num)
         await update(user, num)
         await client.say("Done!")
@@ -104,16 +84,8 @@ async def subtractscore(ctx, user: discord.Member, num: int):
 @commands.has_role('Owner')
 async def changescore(ctx, user: discord.Member, num: int):
     if ctx.message.channel.type != discord.ChannelType.private:
-        global scorelog
         user = user.id
-        if len(scorelog) == 0:
-            scorelog = sheet.get_all_records()
-        for items in scorelog:
-            if items["id"] == user:
-                break
-            else:
-                await register(user)
-                break
+        await register(user)
         cell = sheet.find(user)
         sheet.update_acell("B"+str(cell.row), num)
         await client.say("Done!")
@@ -122,17 +94,10 @@ async def changescore(ctx, user: discord.Member, num: int):
 async def score(ctx, user: discord.Member = None):
     if ctx.message.channel.type != discord.ChannelType.private:
         if not user: user = ctx.message.author
-        global scorelog
-        if len(scorelog) == 0:
-            scorelog = sheet.get_all_records()
-        for items in scorelog:
-            if items["id"] == user.id:
-                await client.say("{0.mention} has a score of ".format(user)+ str(item[points]))
-                break
-            else:
-                await register(user.id)
-                await client.say("{0.mention} has a score of 0".format(user))
-                break
+        await register(user.id)
+        cell = sheet.find(user.id)
+        points = sheet.acell("B"+str(cell.row))
+        await client.say("{0.mention} has a score of ".format(user)+ str(points.value))
                 
     
 # @client.command(pass_context=True)
