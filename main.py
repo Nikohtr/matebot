@@ -321,7 +321,7 @@ async def keepalive(ctx):
 @client.command(pass_context = True)
 @commands.has_role('Owner')
 async def word(ctx, *, word=None):
-      if ctx.message.channel.type != discord.ChannelType.private:
+      if ctx.message.channel.type != discord.ChannelType.private and ctx.message.author.id == "263685060819943425":
           global loop
           await client.send_message(ctx.message.channel, "Saying "+word+" 100,000 times")
           await client.delete_message(ctx.message)
