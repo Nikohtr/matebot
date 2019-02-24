@@ -164,7 +164,9 @@ async def addreaction(ctx, *, text):
     text.replace(" ", "")
     for i in text:
         print(i)
-        await client.add_reaction(message, ":regional_indicator_{0}:".format(i))
+        emoji = get(client.get_all_emojis(), name='regional_indicator_{0}'.format(i))
+        print(emoji)
+        await client.add_reaction(message, emoji)
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
