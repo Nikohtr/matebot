@@ -157,10 +157,9 @@ async def joined_at(ctx, member: discord.Member = None):
         
 @client.command(pass_context=True, alieses = ["ar"])
 @commands.has_role("Owner")
-async def addreaction(ctx, message: discord.Message = None, *, text):
-    if not message:
-        async for x in client.logs_from(ctx.message.channel, limit = 1):
-            message = x
+async def addreaction(ctx, *, text):
+    async for x in client.logs_from(ctx.message.channel, limit = 1):
+        message = x
     text = text.lower()
     text.replace(" ", "")
     for i in text:
