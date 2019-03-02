@@ -155,18 +155,15 @@ async def joined_at(ctx, member: discord.Member = None):
         await client.say('{0} joined at {0.joined_at}'.format(member))
         
         
-@client.command(pass_context=True, alieses = ["ar"])
+@client.command(pass_context=True, aliases = ["lb"])
 @commands.has_role("Owner")
-async def addreaction(ctx, *, text):
-    async for x in client.logs_from(ctx.message.channel, limit = 1):
-        message = x
-    text = text.lower()
-    text.replace(" ", "")
-    for i in text:
-        print(i)
-        emoji = get(client.get_all_emojis(), name='regional_indicator_{0}'.format(i))
-        print(emoji)
-        await client.add_reaction(message, emoji)
+async def leaderboard(ctx, *, text):
+    all = sheet.get_all_records()
+    all.sort(key = lambda x: x["points"])
+    em = discord.Embed(title="**Leaderboard**", color=0x00ff00)
+    for x in range(5):
+        em.add_field(value = "<@{0}>: {1}".format(all[x["id"]], all[x["points"]]), inline = False)
+    client.send_message(ctx.message.channel, embed = em)
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
