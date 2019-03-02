@@ -160,9 +160,11 @@ async def joined_at(ctx, member: discord.Member = None):
 async def leaderboard(ctx, *, text):
     all = sheet.get_all_records()
     all.sort(key = lambda x: x["points"])
+    print(all)
     em = discord.Embed(title="**Leaderboard**", color=0x00ff00)
     for x in range(5):
         em.add_field(value = "<@{0}>: {1}".format(all[x["id"]], all[x["points"]]), inline = False)
+        print("Added",x)
     client.send_message(ctx.message.channel, embed = em)
         
 @client.command(pass_context = True)
