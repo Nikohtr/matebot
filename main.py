@@ -165,7 +165,7 @@ async def leaderboard(ctx):
     for x in range(5):
         em.add_field(name = str(x+1), value = "**<@"+str(all[x]["id"])+">: "+str(all[x]["points"])+"**", inline = False)
         print("Added",x)
-    client.send_message(ctx.message.channel, embed = em)
+    await client.send_message(ctx.message.channel, embed = em)
         
 @client.command(pass_context = True)
 @commands.has_role("Owner")
