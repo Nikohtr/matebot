@@ -163,7 +163,7 @@ async def leaderboard(ctx):
     print(all)
     em = discord.Embed(title="**Leaderboard**", color=0x00ff00)
     for x in range(5):
-        em.add_field(value = "<@"+str(all[x]["id"])+">: "+str(all[x]["points"]), inline = False)
+        em.add_field(name = str(x+1), value = "**<@"+str(all[x]["id"])+">: "+str(all[x]["points"])+"**", inline = False)
         print("Added",x)
     client.send_message(ctx.message.channel, embed = em)
         
