@@ -157,7 +157,7 @@ async def joined_at(ctx, member: discord.Member = None):
         
 @client.command(pass_context=True, aliases = ["lb"])
 @commands.has_role("Owner")
-async def leaderboard(ctx, *, text):
+async def leaderboard(ctx):
     all = sheet.get_all_records()
     all.sort(key = lambda x: x["points"])
     print(all)
