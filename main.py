@@ -156,7 +156,6 @@ async def joined_at(ctx, member: discord.Member = None):
         
         
 @client.command(pass_context=True, aliases = ["lb"])
-@commands.has_role("Owner")
 async def leaderboard(ctx):
     all = sheet.get_all_records()
     all.sort(key = lambda x: x["points"], reverse = True)
@@ -498,7 +497,7 @@ async def on_message(message):
         await client.send_message(message.channel, "Nah I don't like speaking in DMs")  
       elif message.content.startswith("+") and "owner" in urole:
         pass
-      elif message.content=="+gap" or message.content=="+dislikes" or message.content == "+score":
+      elif message.content=="+gap" or message.content=="+dislikes" or message.content == "+score" or message.content == "+leaderboard" or message.content == "+lb":
         pass
       elif await isEnglish(message.content):
         await client.delete_message(message)
