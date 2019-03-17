@@ -279,9 +279,10 @@ async def sub():
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
         async for message in client.logs_from(client.get_channel("556818522056163339"), limit=1):
             if message.author == client.user:
-                su = message.content
+                su = message
         now = datetime.now()
         dif = (datetime.now()-su.timestamp).total_seconds()
+        su = su.content
         if dif>600 and su == "True":
             await client.send_message(client.get_channel("556818522056163339"), "False")
             su = "False"
