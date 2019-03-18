@@ -13,6 +13,7 @@ import ast
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from discord_webhook import DiscordWebhook
+from datetime import timedelta 
 
 loop = True
 scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
@@ -295,7 +296,7 @@ async def sub():
             await client.send_message(client.get_channel("532571319196188712"), subsnow)
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
         elif int(subst)>int(subspew) and su == "False":
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been passed and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" and the time was "+str(datetime.now())+" \nSAD by xxxtentacion ")
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been passed and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" and the time was "+str(datetime.now()+timedelta(hours=2))+" \nSAD by xxxtentacion ")
             await client.send_message(client.get_channel("556818522056163339"), "True")
         await asyncio.sleep(20)
         
