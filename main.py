@@ -36,7 +36,7 @@ async def on_ready():
 @client.command(pass_context=True)
 async def killswitch(ctx):
     if ctx.message.author.id == "263685060819943425":
-        await clinet.say("Alright see you on the other side")
+        await client.say("Alright see you on the other side")
         exit()
  
 async def register(user):
