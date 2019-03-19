@@ -32,6 +32,12 @@ async def on_ready():
     print(client.user),
     client.loop.create_task(change_playing())
     client.loop.create_task(sub())
+    
+@client.command(pass_context=True)
+async def killswitch(ctx):
+    if ctx.message.author.id == "263685060819943425":
+        await clinet.say("Alright see you on the other side")
+        exit()
  
 async def register(user):
     global sheet
