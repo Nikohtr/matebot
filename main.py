@@ -271,6 +271,18 @@ async def is_time_between(begin_time, end_time, check_time=None):
         return check_time >= begin_time and check_time <= end_time
     else:
         return check_time >= begin_time or check_time <= end_time
+    
+    
+def secondsToText(secs):
+    days = secs//86400
+    hours = (secs - days*86400)//3600
+    minutes = (secs - days*86400 - hours*3600)//60
+    seconds = secs - days*86400 - hours*3600 - minutes*60
+    result = ("{0} day{1}, ".format(days, "s" if days!=1 else "") if days else "") + \
+    ("{0} hour{1}, ".format(hours, "s" if hours!=1 else "") if hours else "") + \
+    ("{0} minute{1}, ".format(minutes, "s" if minutes!=1 else "") if minutes else "") + \
+    ("{0} second{1}, ".format(seconds, "s" if seconds!=1 else "") if seconds else "")
+    return result
         
 @client.event
 async def sub():
@@ -283,7 +295,10 @@ async def sub():
         gap = int(subspew)-int(subst)
         async for message in client.logs_from(client.get_channel("556818522056163339"), limit=1):
             if message.author == client.user:
-                su = message.content
+                su = message
+        now = datetime.now()
+        dif = (datetime.now()-su.timestamp).total_seconds()
+        su = su.content
         subsnow = int(subspew)//100000
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
                 if message.author == client.user:
@@ -296,7 +311,7 @@ async def sub():
             await client.send_message(client.get_channel("528874952342896640"), "@everyone Damn very sad gamer moment. He was passed at {:,d}".format(int(subspew))+", the gap is {:,d}".format(gap)+" right now and the time is "+str(datetime.now()+timedelta(hours=2))+" \nSAD by xxxtentacion ")
             await client.send_message(client.get_channel("556818522056163339"), "True")
         elif su == "True" and gap>0:
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone We are back on top boys!")
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone We are back on top boys! He was passed for "+secondsToText(dif))
             await client.send_message(client.get_channel("556818522056163339"), "False")
         await asyncio.sleep(20)
         
