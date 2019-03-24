@@ -280,15 +280,10 @@ async def sub():
         subst = json.loads(data1)["items"][0]["statistics"]["subscriberCount"]
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key="+key).read()
         subspew = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+        gap = int(subspew)-int(subst)
         async for message in client.logs_from(client.get_channel("556818522056163339"), limit=1):
             if message.author == client.user:
-                su = message
-        now = datetime.now()
-        dif = (datetime.now()-su.timestamp).total_seconds()
-        su = su.content
-        if dif>600 and su == "True":
-            await client.send_message(client.get_channel("556818522056163339"), "False")
-            su = "False"
+                su = message.content
         subsnow = int(subspew)//100000
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
                 if message.author == client.user:
@@ -298,8 +293,11 @@ async def sub():
             await client.send_message(client.get_channel("532571319196188712"), subsnow)
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
         elif int(subst)>int(subspew) and su == "False":
-            await client.send_message(client.get_channel("528874952342896640"), "@everyone If you are reading this then it's too late. The worst thing has happened. PewDiePie our lord and savior has been passed and yes I am crying I am not gonna lie. It was a good fight solders. All of you have earned my respect. He is still number one in our hearts. He was passed at {:,d}".format(int(subspew))+" and the time was "+str(datetime.now()+timedelta(hours=2))+" \nSAD by xxxtentacion ")
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone Damn very sad gamer moment. He was passed at {:,d}".format(int(subspew))+", the gap is {:,d}".format(gap)+" right now and the time is "+str(datetime.now()+timedelta(hours=2))+" \nSAD by xxxtentacion ")
             await client.send_message(client.get_channel("556818522056163339"), "True")
+        elif su == "True" and gap>0:
+            await client.send_message(client.get_channel("528874952342896640"), "@everyone We are back on top boys!")
+            await client.send_message(client.get_channel("556818522056163339"), "False")
         await asyncio.sleep(20)
         
         
