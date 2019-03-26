@@ -307,7 +307,7 @@ async def sub():
             print(subspew)
             await client.send_message(client.get_channel("532571319196188712"), subsnow)
             await client.send_message(client.get_channel("528874952342896640"), "@everyone PewDiePie just hit {:,d}".format(subsnow*100000))
-        elif int(subst)>int(subspew) and su == "False":
+        elif gap<0 and su == "False":
             await client.send_message(client.get_channel("528874952342896640"), "@everyone Damn very sad gamer moment. He was passed at {:,d}".format(int(subspew))+", the gap is {:,d}".format(gap)+" right now and the time is "+str(datetime.now()+timedelta(hours=2))+" \nSAD by xxxtentacion ")
             await client.send_message(client.get_channel("556818522056163339"), "True")
         elif su == "True" and gap>0:
