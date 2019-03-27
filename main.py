@@ -296,8 +296,7 @@ async def sub():
         async for message in client.logs_from(client.get_channel("556818522056163339"), limit=1):
             if message.author == client.user:
                 su = message
-        now = datetime.now()
-        dif = (datetime.now()-su.timestamp).total_seconds()
+        msg = su
         su = su.content
         subsnow = int(subspew)//100000
         async for message in client.logs_from(client.get_channel("532571319196188712"), limit=1):
@@ -311,6 +310,8 @@ async def sub():
             await client.send_message(client.get_channel("528874952342896640"), "@everyone Damn very sad gamer moment. He was passed at {:,d}".format(int(subspew))+", the gap is {:,d}".format(gap)+" right now and the time is "+str(datetime.now()+timedelta(hours=2))+" \nSAD by xxxtentacion ")
             await client.send_message(client.get_channel("556818522056163339"), "True")
         elif su == "True" and gap>0:
+            now = datetime.now()
+            dif = (datetime.now()-msg.timestamp).total_seconds()
             await client.send_message(client.get_channel("528874952342896640"), "@everyone We are back on top boys! He was passed for "+secondsToText(dif))
             await client.send_message(client.get_channel("556818522056163339"), "False")
         await asyncio.sleep(20)
