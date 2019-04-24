@@ -14,6 +14,15 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from discord_webhook import DiscordWebhook
 from datetime import timedelta 
+import requests
+
+requestParams = {
+    "method": "getQuote",
+    "key": "457653",
+    "format": "json",
+    "lang": "en"    
+    }
+url = "http://api.forismatic.com/api/1.0/"
 
 loop = True
 scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
@@ -336,10 +345,13 @@ async def pewdie9(ctx):
         for item in loser:
             try:
                 print(item)
-                await client.send_message(await client.get_user_info(item) , "Just a friendly reminder that no one likes you and you are a disappointment for your parents")
+                requestToApi = requests.post(url, params=requestParams)
+                json = requestToApi.json() 
+                finishedQuote = json['quoteText'] + " -" + json['quoteAuthor']
+                await client.send_message(await client.get_user_info(item) , "Hope you enjoyed living today. Be grateful for what you have because you don't know when you might lose it. Here is an inspirational quote to keep you going:\n"+finishedQuote)
             except discord.Forbidden:
                 hurl = os.getenv("hook_url")
-                hook = DiscordWebhook(url= hurl, content = "<@"+item+"> You think blocking my man MATEBot can save you. Pathetic. Just a friendly reminder that no one likes you and you are a disappointment for your parents")
+                hook = DiscordWebhook(url= hurl, content = "<@"+item+"> Hope you enjoyed living today. Be grateful for what you have because you don't know when you might lose it. Here is an inspirational quote to keep you going:\n"+finishedQuote")
                 hook.execute()
                 
 @client.command(pass_context = True)
@@ -355,7 +367,19 @@ async def keepalive(ctx):
     if ctx.message.channel.type != discord.ChannelType.private and ctx.message.author.bot:
         await client.say("I ain't sleeping boi!")
         
+@client.command()
+@commands.has_role("Owner")
+async def dm(*, text):
+    async for message in client.logs_from(client.get_channel("530336392455258142"), limit=1):
+            if message.author == client.user:
+                loser = message.content
+                loser = loser.split(",")
+                print(loser)
+    for item in loser:
+        await client.send_message(await client.get_user_info(item) , text)
 
+                                      
+                                      
       
 @client.command(pass_context = True)
 @commands.has_role('Owner')
