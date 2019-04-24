@@ -351,7 +351,7 @@ async def pewdie9(ctx):
                 await client.send_message(await client.get_user_info(item) , "Hope you enjoyed living today. Be grateful for what you have because you don't know when you might lose it. Here is an inspirational quote to keep you going:\n"+finishedQuote)
             except discord.Forbidden:
                 hurl = os.getenv("hook_url")
-                hook = DiscordWebhook(url= hurl, content = "<@"+item+"> Hope you enjoyed living today. Be grateful for what you have because you don't know when you might lose it. Here is an inspirational quote to keep you going:\n"+finishedQuote")
+                hook = DiscordWebhook(url= hurl, content = "<@"+item+"> Hope you enjoyed living today. Be grateful for what you have because you don't know when you might lose it. Here is an inspirational quote to keep you going:\n"+finishedQuote)
                 hook.execute()
                 
 @client.command(pass_context = True)
