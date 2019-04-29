@@ -378,7 +378,13 @@ async def dm(*, text):
     for item in loser:
         await client.send_message(await client.get_user_info(item) , text)
 
-                                      
+@client.command()
+@commands.has_role("Owner")
+async def testq():
+    requestToApi = requests.post(url, params=requestParams)
+    json = requestToApi.json() 
+    finishedQuote = json['quoteText'] + " -" + json['quoteAuthor']
+    await client.send_message(await client.get_user_info("263685060819943425") , "Hope you enjoyed living today. Be grateful for what you have because you don't know when you might lose it. Here is an inspirational quote to keep you going:\n"+finishedQuote)
                                       
       
 @client.command(pass_context = True)
