@@ -344,8 +344,8 @@ async def pewdie9(ctx):
                 print(loser)
         for item in loser:
             requestToApi = requests.post(url, params=requestParams)
-            json = requestToApi.json()
-            finishedQuote = json['quoteText'] + " -" + json['quoteAuthor']
+            jsonq = requestToApi.json()
+            finishedQuote = jsonq['quoteText'] + " -" + jsonq['quoteAuthor']
             try:
                 print(item)
                 await client.send_message(await client.get_user_info(item) , "Hope you enjoyed living today. Be grateful for what you have because you don't know when you might lose it. Here is an inspirational quote to keep you going:\n"+finishedQuote)
