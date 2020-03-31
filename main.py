@@ -31,7 +31,7 @@ async def role(ctx, user: discord.Member, *, roleadd):
     else:
         await client.delete_message(ctx.message)
         role = get(member.server.roles, name=str(roleadd))
-        await client.add_role(user, role)
+        await client.add_role(user.id, role)
 
 
 
