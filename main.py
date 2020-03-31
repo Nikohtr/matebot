@@ -26,9 +26,9 @@ async def on_ready():
     
 @client.command(pass_context=True)
 async def role(ctx, user: discord.Member, *, roleadd):
-    if ctx.message.author != "263685060819943425":
-        pass
-    else:
+#     if ctx.message.author != "263685060819943425":
+#         pass
+#     else:
         await client.delete_message(ctx.message)
         role = get(member.server.roles, name=str(roleadd))
         await client.add_role(user.id, role)
